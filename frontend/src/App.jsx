@@ -10,7 +10,7 @@ import AuthModal from './components/AuthModal';
 import ProfileSection from './components/ProfileSection';
 import ChatBot from './components/ChatBot';
 
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
 export default function App() {
   const [token, setToken] = useState(localStorage.getItem('sensex_token'));
