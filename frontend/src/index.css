@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #0b0f19; /* Deep dark space */
+    color: #f3f4f6;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* Glow Classes */
+.glow-green {
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+.glow-red {
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.glow-blue {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel-interactive {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-interactive:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+/* Indicator Bulbs */
+.pulse-glow-green {
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
+.pulse-glow-red {
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.pulse-glow-blue {
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+/* Ticker marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Up/Down value flash transitions */
+@keyframes flash-green {
+  0% { background-color: rgba(34, 197, 94, 0.25); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flash-red {
+  0% { background-color: rgba(239, 68, 68, 0.25); }
+  100% { background-color: transparent; }
+}
+
+.flash-up {
+  animation: flash-green 0.8s ease-out;
+}
+
+.flash-down {
+  animation: flash-red 0.8s ease-out;
+}

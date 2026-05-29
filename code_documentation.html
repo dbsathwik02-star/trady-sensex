@@ -1,0 +1,3358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BSE SENSEX Live Trader - Code Documentation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+  <style>
+    body {
+      background-color: #070b13;
+      font-family: 'Inter', sans-serif;
+    }
+    pre {
+      margin: 0 !important;
+      background: transparent !important;
+    }
+    code {
+      font-family: 'Fira Code', Consolas, Monaco, monospace !important;
+      font-size: 13px !important;
+    }
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.5);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.2);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(148, 163, 184, 0.4);
+    }
+  </style>
+</head>
+<body class="text-slate-200">
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    <header class="mb-6 flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-black text-white bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">BSE SENSEX Live Trader Code Document</h1>
+        <p class="text-xs text-slate-500 font-bold mt-1 uppercase tracking-wider">All project files bundled into a single web document</p>
+      </div>
+      <span class="px-3 py-1 bg-slate-900 border border-slate-800 text-xs font-bold text-slate-400 rounded-lg">Version 1.2.0</span>
+    </header>
+
+    <div class="border border-slate-800 rounded-2xl overflow-hidden bg-[#0b0f19] shadow-2xl flex flex-col md:flex-row min-h-[80vh]">
+      <!-- File Selector Sidebar -->
+      <div class="md:w-64 border-r border-slate-800 bg-[#090d16] flex flex-col">
+        <div class="p-4 border-b border-slate-800">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Project Files</span>
+        </div>
+        <div id="tabs" class="flex-1 overflow-y-auto">
+          
+      <button 
+        onclick="switchTab(event, 'tab-0')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate border-blue-500 text-white bg-slate-800/40"
+      >
+        backend/server.js
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-1')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        backend/simulator.js
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-2')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        backend/indicators.js
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-3')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        backend/database.js
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-4')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/App.jsx
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-5')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/index.css
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-6')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/components/ChartSection.jsx
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-7')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/components/OrderForm.jsx
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-8')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/components/Portfolio.jsx
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-9')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/components/Watchlist.jsx
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-10')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/components/NewsFeed.jsx
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-11')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/components/AuthModal.jsx
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-12')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/components/ProfileSection.jsx
+      </button>
+    
+      <button 
+        onclick="switchTab(event, 'tab-13')" 
+        class="tab-btn w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/20 border-l-2 border-transparent transition-all truncate "
+      >
+        frontend/src/components/ChatBot.jsx
+      </button>
+    
+        </div>
+      </div>
+
+      <!-- Code Content View -->
+      <div class="flex-1 flex flex-col bg-[#080c14]">
+        <div class="bg-slate-900/40 p-3 border-b border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+          <span id="active-file-title" class="font-semibold text-slate-300">backend/server.js</span>
+          <span>Syntax Highlighting Active</span>
+        </div>
+        <div class="flex-1">
+          
+      <div id="tab-0" class="tab-content block p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import express from &#039;express&#039;;
+import http from &#039;http&#039;;
+import { Server } from &#039;socket.io&#039;;
+import cors from &#039;cors&#039;;
+import dotenv from &#039;dotenv&#039;;
+import jwt from &#039;jsonwebtoken&#039;;
+import bcrypt from &#039;bcryptjs&#039;;
+import { connectDB, isDbConnected, User, Portfolio, Transaction, Watchlist } from &#039;./database.js&#039;;
+import { MarketSimulator, STOCKS_METADATA } from &#039;./simulator.js&#039;;
+
+dotenv.config();
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: &#039;*&#039;,
+    methods: [&#039;GET&#039;, &#039;POST&#039;]
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+const JWT_SECRET = process.env.JWT_SECRET || &#039;sensex_super_secret_key_2026&#039;;
+
+app.use(cors());
+app.use(express.json());
+
+// Initialize Market Simulator
+const simulator = new MarketSimulator();
+
+// Graceful Database connection setup
+connectDB();
+
+// Fallback in-memory structures used when MongoDB is offline
+let fallbackUsers = []; // { id, name, email, password, avatar, tradingLevel }
+let fallbackPortfolios = {}; // userId -&gt; { balance, holdings }
+let fallbackTransactions = {}; // userId -&gt; [transactions]
+let fallbackWatchlists = {}; // userId -&gt; [symbols]
+
+// Authentication Middleware
+const authenticateToken = (req, res, next) =&gt; {
+  const authHeader = req.headers[&#039;authorization&#039;];
+  const token = authHeader &amp;&amp; authHeader.split(&#039; &#039;)[1];
+
+  if (!token) return res.status(401).json({ error: &#039;Access token missing&#039; });
+
+  jwt.verify(token, JWT_SECRET, (err, decoded) =&gt; {
+    if (err) return res.status(403).json({ error: &#039;Token expired or invalid&#039; });
+    req.user = decoded; // { id, email }
+    next();
+  });
+};
+
+// Database utility helpers locked per user ID
+const getUserPortfolio = async (userId) =&gt; {
+  if (!isDbConnected()) {
+    if (!fallbackPortfolios[userId]) {
+      fallbackPortfolios[userId] = { balance: 1000000, holdings: [] };
+    }
+    return fallbackPortfolios[userId];
+  }
+  try {
+    let p = await Portfolio.findOne({ userId });
+    if (!p) {
+      p = new Portfolio({ userId, balance: 1000000, holdings: [] });
+      await p.save();
+    }
+    return p;
+  } catch (err) {
+    console.error(&#039;Failed to get DB portfolio, using fallback:&#039;, err.message);
+    if (!fallbackPortfolios[userId]) {
+      fallbackPortfolios[userId] = { balance: 1000000, holdings: [] };
+    }
+    return fallbackPortfolios[userId];
+  }
+};
+
+const getUserWatchlist = async (userId) =&gt; {
+  if (!isDbConnected()) {
+    if (!fallbackWatchlists[userId]) {
+      fallbackWatchlists[userId] = [&#039;SENSEX&#039;, &#039;RELIANCE&#039;, &#039;TCS&#039;, &#039;HDFCBANK&#039;, &#039;INFY&#039;];
+    }
+    return fallbackWatchlists[userId];
+  }
+  try {
+    let w = await Watchlist.findOne({ userId });
+    if (!w) {
+      w = new Watchlist({ userId, symbols: [&#039;SENSEX&#039;, &#039;RELIANCE&#039;, &#039;TCS&#039;, &#039;HDFCBANK&#039;, &#039;INFY&#039;] });
+      await w.save();
+    }
+    return w.symbols;
+  } catch (err) {
+    console.error(&#039;Failed to get DB watchlist, using fallback:&#039;, err.message);
+    if (!fallbackWatchlists[userId]) {
+      fallbackWatchlists[userId] = [&#039;SENSEX&#039;, &#039;RELIANCE&#039;, &#039;TCS&#039;, &#039;HDFCBANK&#039;, &#039;INFY&#039;];
+    }
+    return fallbackWatchlists[userId];
+  }
+};
+
+const getUserTransactions = async (userId) =&gt; {
+  if (!isDbConnected()) {
+    return fallbackTransactions[userId] || [];
+  }
+  try {
+    return await Transaction.find({ userId }).sort({ timestamp: -1 }).limit(50);
+  } catch (err) {
+    console.error(&#039;Failed to get DB transactions, using fallback:&#039;, err.message);
+    return fallbackTransactions[userId] || [];
+  }
+};
+
+// Auth REST Endpoints
+app.post(&#039;/api/auth/register&#039;, async (req, res) =&gt; {
+  try {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: &#039;All registration inputs are required&#039; });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!isDbConnected()) {
+      const exists = fallbackUsers.find(u =&gt; u.email === email);
+      if (exists) return res.status(400).json({ error: &#039;User already exists&#039; });
+
+      const newUser = {
+        id: Math.random().toString(36).substring(7),
+        name,
+        email,
+        password: hashedPassword,
+        avatar: &#039;blue&#039;,
+        tradingLevel: &#039;Novice&#039;,
+        createdAt: new Date()
+      };
+      fallbackUsers.push(newUser);
+      
+      const token = jwt.sign({ id: newUser.id, email: newUser.email }, JWT_SECRET, { expiresIn: &#039;7d&#039; });
+      return res.json({ token, user: { name: newUser.name, email: newUser.email, avatar: newUser.avatar, tradingLevel: newUser.tradingLevel } });
+    }
+
+    const exists = await User.findOne({ email });
+    if (exists) return res.status(400).json({ error: &#039;User already exists&#039; });
+
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword
+    });
+    await newUser.save();
+
+    const portfolio = new Portfolio({ userId: newUser._id, balance: 1000000, holdings: [] });
+    await portfolio.save();
+
+    const watchlist = new Watchlist({ userId: newUser._id });
+    await watchlist.save();
+
+    const token = jwt.sign({ id: newUser._id, email: newUser.email }, JWT_SECRET, { expiresIn: &#039;7d&#039; });
+    res.json({
+      token,
+      user: {
+        name: newUser.name,
+        email: newUser.email,
+        avatar: newUser.avatar,
+        tradingLevel: newUser.tradingLevel
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post(&#039;/api/auth/login&#039;, async (req, res) =&gt; {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: &#039;Email and password are required&#039; });
+    }
+
+    let user;
+    if (!isDbConnected()) {
+      user = fallbackUsers.find(u =&gt; u.email === email);
+      if (!user) return res.status(400).json({ error: &#039;Invalid login credentials&#039; });
+    } else {
+      user = await User.findOne({ email });
+      if (!user) return res.status(400).json({ error: &#039;Invalid login credentials&#039; });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ error: &#039;Invalid login credentials&#039; });
+
+    const userId = !isDbConnected() ? user.id : user._id;
+    const token = jwt.sign({ id: userId, email: user.email }, JWT_SECRET, { expiresIn: &#039;7d&#039; });
+
+    res.json({
+      token,
+      user: {
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        tradingLevel: user.tradingLevel
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get(&#039;/api/auth/profile&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    let user;
+    if (!isDbConnected()) {
+      user = fallbackUsers.find(u =&gt; u.id === req.user.id);
+    } else {
+      user = await User.findById(req.user.id).select(&#039;-password&#039;);
+    }
+
+    if (!user) return res.status(404).json({ error: &#039;User profile not found&#039; });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post(&#039;/api/auth/profile/update&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    const { name, avatar, tradingLevel } = req.body;
+
+    if (!isDbConnected()) {
+      const idx = fallbackUsers.findIndex(u =&gt; u.id === req.user.id);
+      if (idx === -1) return res.status(404).json({ error: &#039;User profile not found&#039; });
+      
+      const user = fallbackUsers[idx];
+      if (name) user.name = name;
+      if (avatar) user.avatar = avatar;
+      if (tradingLevel) user.tradingLevel = tradingLevel;
+      
+      return res.json(user);
+    }
+
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ error: &#039;User profile not found&#039; });
+
+    if (name) user.name = name;
+    if (avatar) user.avatar = avatar;
+    if (tradingLevel) user.tradingLevel = tradingLevel;
+
+    await user.save();
+    res.json({
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      tradingLevel: user.tradingLevel
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Secure Tickers/News (Public endpoints)
+app.get(&#039;/api/stocks&#039;, (req, res) =&gt; {
+  res.json(simulator.getFullState());
+});
+
+app.get(&#039;/api/news&#039;, (req, res) =&gt; {
+  res.json(simulator.getNews());
+});
+
+// Public Search Endpoint - Handles 60+ blue chips or instantiates custom ticker searches dynamically
+app.get(&#039;/api/stocks/search&#039;, (req, res) =&gt; {
+  try {
+    const query = (req.query.q || &#039;&#039;).toUpperCase().trim();
+    if (!query) {
+      return res.json([]);
+    }
+
+    const activeStocks = simulator.getFullState();
+    const matches = [];
+
+    // 1. Matches in currently active stocks
+    Object.keys(activeStocks).forEach(symbol =&gt; {
+      const name = activeStocks[symbol].name.toUpperCase();
+      if (symbol.includes(query) || name.includes(query)) {
+        matches.push(activeStocks[symbol]);
+      }
+    });
+
+    // 2. Matches in metadata not currently active
+    Object.keys(STOCKS_METADATA).forEach(symbol =&gt; {
+      const name = STOCKS_METADATA[symbol].name.toUpperCase();
+      const inMatches = matches.some(m =&gt; m.symbol === symbol);
+      if (!inMatches &amp;&amp; (symbol.includes(query) || name.includes(query))) {
+        const stock = simulator.addDynamicStock(symbol, STOCKS_METADATA[symbol].name);
+        matches.push(stock);
+      }
+    });
+
+    // 3. Dynamic Custom Seeding fallback if search is 2-8 char alphanumeric string
+    if (matches.length === 0 &amp;&amp; /^[A-Z0-9-]{2,8}$/.test(query)) {
+      const customStock = simulator.addDynamicStock(query);
+      matches.push(customStock);
+    }
+
+    res.json(matches);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Secured REST Endpoints (Require authenticateToken)
+app.get(&#039;/api/portfolio&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    const portfolio = await getUserPortfolio(req.user.id);
+    res.json(portfolio);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get(&#039;/api/transactions&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    const transactions = await getUserTransactions(req.user.id);
+    res.json(transactions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get(&#039;/api/watchlist&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    const watchlist = await getUserWatchlist(req.user.id);
+    res.json(watchlist);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post(&#039;/api/watchlist&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    const { symbols } = req.body;
+    if (!Array.isArray(symbols)) {
+      return res.status(400).json({ error: &#039;Symbols must be an array&#039; });
+    }
+
+    if (!isDbConnected()) {
+      fallbackWatchlists[req.user.id] = symbols;
+      return res.json(fallbackWatchlists[req.user.id]);
+    }
+
+    let w = await Watchlist.findOne({ userId: req.user.id });
+    if (!w) {
+      w = new Watchlist({ userId: req.user.id, symbols });
+    } else {
+      w.symbols = symbols;
+    }
+    await w.save();
+    res.json(w.symbols);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post(&#039;/api/portfolio/reset&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    if (!isDbConnected()) {
+      fallbackPortfolios[req.user.id] = { balance: 1000000, holdings: [] };
+      fallbackTransactions[req.user.id] = [];
+      return res.json(fallbackPortfolios[req.user.id]);
+    }
+    
+    let p = await Portfolio.findOne({ userId: req.user.id });
+    if (p) {
+      p.balance = 1000000;
+      p.holdings = [];
+      await p.save();
+    }
+    await Transaction.deleteMany({ userId: req.user.id });
+    res.json(p);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.post(&#039;/api/trade&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    const { symbol, quantity, type, price } = req.body;
+    const qty = Number(quantity);
+    const executionPrice = Number(price);
+
+    if (!symbol || !qty || qty &lt;= 0 || !type || !executionPrice) {
+      return res.status(400).json({ error: &#039;Invalid trade details&#039; });
+    }
+
+    const stockMeta = STOCKS_METADATA[symbol] || { name: `${symbol.toUpperCase()} Industries Ltd.` };
+    const name = stockMeta.name;
+
+    const portfolio = await getUserPortfolio(req.user.id);
+    const totalCost = qty * executionPrice;
+
+    if (type === &#039;BUY&#039;) {
+      if (portfolio.balance &lt; totalCost) {
+        return res.status(400).json({ error: &#039;Insufficient virtual cash balance for this trade&#039; });
+      }
+
+      portfolio.balance -= totalCost;
+
+      const existingHolding = portfolio.holdings.find(h =&gt; h.symbol === symbol);
+      if (existingHolding) {
+        const currentQty = existingHolding.quantity;
+        const currentAvg = existingHolding.avgPrice;
+        existingHolding.avgPrice = ((currentQty * currentAvg) + (qty * executionPrice)) / (currentQty + qty);
+        existingHolding.quantity += qty;
+      } else {
+        portfolio.holdings.push({
+          symbol,
+          name,
+          quantity: qty,
+          avgPrice: executionPrice
+        });
+      }
+    } else if (type === &#039;SELL&#039;) {
+      const holdingIndex = portfolio.holdings.findIndex(h =&gt; h.symbol === symbol);
+      if (holdingIndex === -1 || portfolio.holdings[holdingIndex].quantity &lt; qty) {
+        return res.status(400).json({ error: &#039;Insufficient quantity in holdings&#039; });
+      }
+
+      portfolio.balance += totalCost;
+
+      const holding = portfolio.holdings[holdingIndex];
+      holding.quantity -= qty;
+      if (holding.quantity === 0) {
+        portfolio.holdings.splice(holdingIndex, 1);
+      }
+    } else {
+      return res.status(400).json({ error: &#039;Trade type must be BUY or SELL&#039; });
+    }
+
+    const newTx = {
+      userId: req.user.id,
+      symbol,
+      name,
+      quantity: qty,
+      price: executionPrice,
+      type,
+      timestamp: new Date()
+    };
+
+    if (!isDbConnected()) {
+      if (!fallbackTransactions[req.user.id]) {
+        fallbackTransactions[req.user.id] = [];
+      }
+      fallbackTransactions[req.user.id].unshift(newTx);
+      if (fallbackTransactions[req.user.id].length &gt; 50) fallbackTransactions[req.user.id].pop();
+    } else {
+      const transactionRecord = new Transaction(newTx);
+      await transactionRecord.save();
+      await portfolio.save();
+    }
+
+    res.json({
+      success: true,
+      portfolio,
+      transaction: newTx
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// AI Chatbot NLP Endpoint
+app.post(&#039;/api/chatbot&#039;, authenticateToken, async (req, res) =&gt; {
+  try {
+    const { message } = req.body;
+    if (!message) return res.status(400).json({ error: &#039;Message content is required&#039; });
+
+    const cleanMsg = message.toLowerCase();
+    const portfolio = await getUserPortfolio(req.user.id);
+    const liveStocks = simulator.getFullState();
+
+    let responseText = &#039;&#039;;
+
+    if (cleanMsg.includes(&#039;portfolio&#039;) || cleanMsg.includes(&#039;holding&#039;) || cleanMsg.includes(&#039;balance&#039;) || cleanMsg.includes(&#039;cash&#039;) || cleanMsg.includes(&#039;p&amp;l&#039;) || cleanMsg.includes(&#039;profit&#039;)) {
+      const totalCash = portfolio.balance;
+      const holdings = portfolio.holdings || [];
+      const totalCost = holdings.reduce((sum, h) =&gt; sum + (h.quantity * h.avgPrice), 0);
+      const currentValue = holdings.reduce((sum, h) =&gt; {
+        const livePrice = liveStocks[h.symbol]?.price || h.avgPrice;
+        return sum + (h.quantity * livePrice);
+      }, 0);
+      const totalPnL = currentValue - totalCost;
+
+      let holdingDesc = holdings.map(h =&gt; `${h.quantity} shares of ${h.symbol} (Avg: ₹${h.avgPrice.toFixed(2)})`).join(&#039;, &#039;);
+      if (holdings.length === 0) holdingDesc = &#039;no active positions&#039;;
+
+      responseText = `📊 **Portfolio Report:**\n- **Virtual Cash Balance:** ₹${totalCash.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })}\n- **Holdings Value:** ₹${currentValue.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })}\n- **Unrealized P&amp;L:** ₹${totalPnL.toFixed(2)} (${totalCost &gt; 0 ? ((totalPnL / totalCost) * 100).toFixed(2) : 0}%)\n- **Active Holdings:** ${holdingDesc}.\n\n*Suggestion:* If your P&amp;L is positive, consider setting a Take Profit target in the Order Placement panel to protect your virtual gains!`;
+    } 
+    else if (Object.keys(STOCKS_METADATA).some(symbol =&gt; cleanMsg.includes(symbol.toLowerCase())) || Object.keys(liveStocks).some(symbol =&gt; cleanMsg.includes(symbol.toLowerCase()))) {
+      // Find matching stock key in active list or metadata
+      const matchedSymbol = Object.keys(liveStocks).find(symbol =&gt; cleanMsg.includes(symbol.toLowerCase())) || 
+                            Object.keys(STOCKS_METADATA).find(symbol =&gt; cleanMsg.includes(symbol.toLowerCase()));
+      
+      let stock = liveStocks[matchedSymbol];
+      if (!stock) {
+        stock = simulator.addDynamicStock(matchedSymbol);
+      }
+      
+      if (stock) {
+        const isUp = stock.changePercent &gt;= 0;
+        const signal = stock.indicators?.signal || &#039;NEUTRAL&#039;;
+        const reasons = stock.indicators?.reasons?.join(&#039;, &#039;) || &#039;No strong technical bias&#039;;
+        
+        responseText = `📈 **Stock Alert: ${matchedSymbol}** (${stock.name})\n- **Live Price:** ₹${stock.price.toFixed(2)} (${isUp ? &#039;+&#039; : &#039;&#039;}${stock.changePercent.toFixed(2)}% today)\n- **High/Low:** ₹${stock.high.toFixed(2)} / ₹${stock.low.toFixed(2)}\n- **AI Signal:** **${signal}**\n- **Rationale:** ${reasons}.\n\n*Chatbot Recommendation:* ${
+          signal === &#039;BUY&#039; 
+            ? `Our calculations suggest building a long position on ${matchedSymbol} due to strong bullish momentum.` 
+            : signal === &#039;SELL&#039; 
+              ? `Technical metrics favor trimming positions on ${matchedSymbol}.` 
+              : `Consolidation range detected for ${matchedSymbol}. It is recommended to HOLD.`
+        }`;
+      } else {
+        responseText = `I couldn&#039;t fetch live ticks for ${matchedSymbol} right now.`;
+      }
+    } 
+    else if (cleanMsg.includes(&#039;market&#039;) || cleanMsg.includes(&#039;sensex&#039;) || cleanMsg.includes(&#039;index&#039;) || cleanMsg.includes(&#039;bse&#039;)) {
+      const sensex = liveStocks[&#039;SENSEX&#039;];
+      const isUp = sensex ? sensex.changePercent &gt;= 0 : true;
+      responseText = `🏛️ **BSE SENSEX Market Update:**\n- **Index Value:** ₹${sensex?.price.toFixed(2) || &#039;75,000&#039;}\n- **Daily Change:** ${isUp ? &#039;+&#039; : &#039;&#039;}${sensex?.changePercent.toFixed(2) || &#039;0.00&#039;}%\n- **Volume:** ${sensex?.volume.toLocaleString(&#039;en-IN&#039;) || &#039;0&#039;} shares traded.\n- **Market Bias:** ${isUp ? &#039;📈 Bullish momentum.&#039; : &#039;📉 Bearish pressure.&#039;}`;
+    }
+    else if (cleanMsg.includes(&#039;rsi&#039;) || cleanMsg.includes(&#039;relative strength&#039;)) {
+      responseText = `💡 **Educational Note - RSI (Relative Strength Index):**\n- RSI measures price speed and change on a scale of 0 to 100.\n- **Oversold (&lt; 30):** Represents buying interest. Leads to BUY signals.\n- **Overbought (&gt; 70):** Represents profit-booking zones. Leads to SELL signals.`;
+    }
+    else if (cleanMsg.includes(&#039;macd&#039;)) {
+      responseText = `💡 **Educational Note - MACD (Moving Average Convergence Divergence):**\n- MACD shows the relationship between two moving averages of a stock&#039;s price.\n- A crossover of the MACD line *above* the Signal Line triggers bullish momentum (BUY indicator). Crossover *below* triggers bearish signals (SELL indicator).`;
+    }
+    else if (cleanMsg.includes(&#039;stop loss&#039;) || cleanMsg.includes(&#039;risk&#039;)) {
+      responseText = `🛡️ **Risk Management Advice:**\n- Always trade with a predefined **Stop Loss** to protect your balance from unexpected downturns.\n- In paper trading, test setting target **Take Profit points** (+5%, +10%) using the slider in the Order panel to secure virtual profits.`;
+    }
+    else {
+      responseText = `Hello! 👋 I am your SENSEX AI Assistant.\n\nHere are some things you can ask me:\n- *&quot;How is my portfolio doing?&quot;* to review your holdings and cash.\n- *&quot;Should I buy TCS?&quot;* or *&quot;What is the signal for RELIANCE?&quot;* to analyze specific technical details.\n- *&quot;What is the current market index?&quot;* for live BSE SENSEX rates.\n- *&quot;Explain RSI / MACD&quot;* for trading education support.`;
+    }
+
+    res.json({ response: responseText });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// WebSocket Server Connections
+io.on(&#039;connection&#039;, (socket) =&gt; {
+  console.log(&#039;Client connected to real-time stock feed&#039;);
+  socket.emit(&#039;initial-stocks&#039;, simulator.getFullState());
+  socket.emit(&#039;initial-news&#039;, simulator.getNews());
+
+  socket.on(&#039;disconnect&#039;, () =&gt; {
+    console.log(&#039;Client disconnected&#039;);
+  });
+});
+
+// Periodic price movement tick (every 1.5 seconds)
+setInterval(() =&gt; {
+  const stockTicks = simulator.tick();
+  io.emit(&#039;stock-ticks&#039;, stockTicks);
+}, 1500);
+
+// Periodic news generation (every 18 seconds)
+setInterval(() =&gt; {
+  const { newsEvent, stockAffected } = simulator.generateNews();
+  io.emit(&#039;news-update&#039;, { newsEvent, stockAffected });
+}, 18000);
+
+server.listen(PORT, () =&gt; {
+  console.log(`Backend server running on http://localhost:${PORT}`);
+});
+</code></pre>
+      </div>
+    
+      <div id="tab-1" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import { generateSignal } from &#039;./indicators.js&#039;;
+
+// Expanded BSE &amp; Upstox major constituent stock list (60+ companies)
+export const STOCKS_METADATA = {
+  SENSEX: { name: &#039;BSE SENSEX Index&#039;, basePrice: 75000, volatility: 0.0008 },
+  
+  // Banking &amp; Financials
+  RELIANCE: { name: &#039;Reliance Industries Ltd.&#039;, basePrice: 2850, volatility: 0.0015 },
+  TCS: { name: &#039;Tata Consultancy Services Ltd.&#039;, basePrice: 3820, volatility: 0.0012 },
+  HDFCBANK: { name: &#039;HDFC Bank Ltd.&#039;, basePrice: 1540, volatility: 0.0014 },
+  INFY: { name: &#039;Infosys Ltd.&#039;, basePrice: 1450, volatility: 0.0016 },
+  ICICIBANK: { name: &#039;ICICI Bank Ltd.&#039;, basePrice: 1120, volatility: 0.0013 },
+  SBIN: { name: &#039;State Bank of India&#039;, basePrice: 830, volatility: 0.0018 },
+  KOTAKBANK: { name: &#039;Kotak Mahindra Bank Ltd.&#039;, basePrice: 1720, volatility: 0.0015 },
+  AXISBANK: { name: &#039;Axis Bank Ltd.&#039;, basePrice: 1050, volatility: 0.0016 },
+  INDUSINDBK: { name: &#039;IndusInd Bank Ltd.&#039;, basePrice: 1420, volatility: 0.0018 },
+  PNB: { name: &#039;Punjab National Bank&#039;, basePrice: 125, volatility: 0.0025 },
+  BOB: { name: &#039;Bank of Baroda&#039;, basePrice: 260, volatility: 0.0022 },
+  FEDERALBNK: { name: &#039;The Federal Bank Ltd.&#039;, basePrice: 160, volatility: 0.0020 },
+  BAJFINANCE: { name: &#039;Bajaj Finance Ltd.&#039;, basePrice: 6850, volatility: 0.0018 },
+  BAJAJFINSV: { name: &#039;Bajaj Finserv Ltd.&#039;, basePrice: 1580, volatility: 0.0017 },
+  HDFC: { name: &#039;HDFC Asset Management Co. Ltd.&#039;, basePrice: 3750, volatility: 0.0016 },
+  LICHSGFIN: { name: &#039;LIC Housing Finance Ltd.&#039;, basePrice: 640, volatility: 0.0022 },
+  
+  // Information Technology (IT)
+  WIPRO: { name: &#039;Wipro Ltd.&#039;, basePrice: 460, volatility: 0.0016 },
+  HCLTECH: { name: &#039;HCL Technologies Ltd.&#039;, basePrice: 1320, volatility: 0.0014 },
+  TECHM: { name: &#039;Tech Mahindra Ltd.&#039;, basePrice: 1240, volatility: 0.0018 },
+  LTIM: { name: &#039;LTIMindtree Ltd.&#039;, basePrice: 4780, volatility: 0.0020 },
+  COFORGE: { name: &#039;Coforge Ltd.&#039;, basePrice: 5120, volatility: 0.0022 },
+  PERSISTENT: { name: &#039;Persistent Systems Ltd.&#039;, basePrice: 3450, volatility: 0.0021 },
+  
+  // Oil, Gas, Energy &amp; Power
+  ONGC: { name: &#039;Oil &amp; Natural Gas Corporation Ltd.&#039;, basePrice: 275, volatility: 0.0019 },
+  COALINDIA: { name: &#039;Coal India Ltd.&#039;, basePrice: 450, volatility: 0.0018 },
+  NTPC: { name: &#039;NTPC Ltd.&#039;, basePrice: 360, volatility: 0.0017 },
+  POWERGRID: { name: &#039;Power Grid Corporation of India Ltd.&#039;, basePrice: 285, volatility: 0.0014 },
+  BPCL: { name: &#039;Bharat Petroleum Corporation Ltd.&#039;, basePrice: 620, volatility: 0.0022 },
+  IOC: { name: &#039;Indian Oil Corporation Ltd.&#039;, basePrice: 165, volatility: 0.0020 },
+  GAIL: { name: &#039;GAIL (India) Ltd.&#039;, basePrice: 200, volatility: 0.0018 },
+  TATAPOWER: { name: &#039;Tata Power Co. Ltd.&#039;, basePrice: 430, volatility: 0.0021 },
+  ADANIPOWER: { name: &#039;Adani Power Ltd.&#039;, basePrice: 580, volatility: 0.0028 },
+  JSWENERGY: { name: &#039;JSW Energy Ltd.&#039;, basePrice: 610, volatility: 0.0024 },
+  
+  // Automotive (Auto)
+  TATAMOTORS: { name: &#039;Tata Motors Ltd.&#039;, basePrice: 940, volatility: 0.0022 },
+  MARUTI: { name: &#039;Maruti Suzuki India Ltd.&#039;, basePrice: 12200, volatility: 0.0013 },
+  &#039;M&amp;M&#039;: { name: &#039;Mahindra &amp; Mahindra Ltd.&#039;, basePrice: 2550, volatility: 0.0016 },
+  HEROMOTOCO: { name: &#039;Hero MotoCorp Ltd.&#039;, basePrice: 5100, volatility: 0.0015 },
+  EICHERMOT: { name: &#039;Eicher Motors Ltd.&#039;, basePrice: 4650, volatility: 0.0017 },
+  BAJAJ_AUTO: { name: &#039;Bajaj Auto Ltd.&#039;, basePrice: 8900, volatility: 0.0015 },
+  ASHOKLEY: { name: &#039;Ashok Leyland Ltd.&#039;, basePrice: 215, volatility: 0.0022 },
+  
+  // FMCG &amp; Consumer Durables
+  ITC: { name: &#039;ITC Ltd.&#039;, basePrice: 435, volatility: 0.0011 },
+  HUL: { name: &#039;Hindustan Unilever Ltd.&#039;, basePrice: 2350, volatility: 0.0012 },
+  NESTLEIND: { name: &#039;Nestle India Ltd.&#039;, basePrice: 2480, volatility: 0.0010 },
+  BRITANNIA: { name: &#039;Britannia Industries Ltd.&#039;, basePrice: 5180, volatility: 0.0013 },
+  TATACONSUM: { name: &#039;Tata Consumer Products Ltd.&#039;, basePrice: 1120, volatility: 0.0016 },
+  VBL: { name: &#039;Varun Beverages Ltd.&#039;, basePrice: 1450, volatility: 0.0021 },
+  MARICO: { name: &#039;Marico Ltd.&#039;, basePrice: 610, volatility: 0.0014 },
+  TITAN: { name: &#039;Titan Company Ltd.&#039;, basePrice: 3250, volatility: 0.0015 },
+  ASIANPAINT: { name: &#039;Asian Paints Ltd.&#039;, basePrice: 2850, volatility: 0.0013 },
+  
+  // Metals &amp; Mining
+  TATASTEEL: { name: &#039;Tata Steel Ltd.&#039;, basePrice: 165, volatility: 0.0020 },
+  JSWSTEEL: { name: &#039;JSW Steel Ltd.&#039;, basePrice: 880, volatility: 0.0017 },
+  HINDALCO: { name: &#039;Hindalco Industries Ltd.&#039;, basePrice: 650, volatility: 0.0021 },
+  VEDL: { name: &#039;Vedanta Ltd.&#039;, basePrice: 430, volatility: 0.0025 },
+  NMDC: { name: &#039;NMDC Ltd.&#039;, basePrice: 240, volatility: 0.0024 },
+  
+  // Pharmaceuticals &amp; Health
+  SUNPHARMA: { name: &#039;Sun Pharmaceutical Industries Ltd.&#039;, basePrice: 1480, volatility: 0.0013 },
+  CIPLA: { name: &#039;Cipla Ltd.&#039;, basePrice: 1420, volatility: 0.0014 },
+  DRREDDY: { name: &#039;Dr. Reddys Laboratories Ltd.&#039;, basePrice: 5800, volatility: 0.0015 },
+  APOLLOHOSP: { name: &#039;Apollo Hospitals Enterprise Ltd.&#039;, basePrice: 5950, volatility: 0.0018 },
+  DIVISLAB: { name: &#039;Divis Laboratories Ltd.&#039;, basePrice: 3820, volatility: 0.0019 },
+  
+  // Telecom, Infrastructure &amp; Conglomerates
+  BHARTIARTL: { name: &#039;Bharti Airtel Ltd.&#039;, basePrice: 1350, volatility: 0.0014 },
+  LT: { name: &#039;Larsen &amp; Toubro Ltd.&#039;, basePrice: 3550, volatility: 0.0014 },
+  ADANIPORTS: { name: &#039;Adani Ports &amp; Special Economic Zone Ltd.&#039;, basePrice: 1320, volatility: 0.0024 },
+  ADANIENT: { name: &#039;Adani Enterprises Ltd.&#039;, basePrice: 3120, volatility: 0.0028 },
+  GRASIM: { name: &#039;Grasim Industries Ltd.&#039;, basePrice: 2350, volatility: 0.0016 },
+  ULTRACEMCO: { name: &#039;UltraTech Cement Ltd.&#039;, basePrice: 9800, volatility: 0.0013 },
+  DLF: { name: &#039;DLF Ltd.&#039;, basePrice: 820, volatility: 0.0022 },
+  IDEA: { name: &#039;Vodafone Idea Ltd.&#039;, basePrice: 13, volatility: 0.0035 }
+};
+
+// Initial news templates
+const NEWS_TEMPLATES = [
+  { symbol: &#039;TCS&#039;, text: &#039;TCS signs multi-million dollar cloud migration deal with European retail giant.&#039;, impact: 0.015 },
+  { symbol: &#039;RELIANCE&#039;, text: &#039;Reliance Retail expands operations, opening 50 new smart stores across tier-2 cities.&#039;, impact: 0.012 },
+  { symbol: &#039;HDFCBANK&#039;, text: &#039;HDFC Bank launches state-of-the-art mobile banking app to capture rural markets.&#039;, impact: 0.008 },
+  { symbol: &#039;INFY&#039;, text: &#039;Infosys announces collaboration with global chipmaker for next-gen AI platforms.&#039;, impact: 0.014 },
+  { symbol: &#039;SBIN&#039;, text: &#039;RBI announces policy rates unchanged; banking sector shows positive sentiment.&#039;, impact: 0.005, global: true },
+  { symbol: &#039;ITC&#039;, text: &#039;ITC Q4 net profit beats street estimates by 6.2%; board proposes high dividend.&#039;, impact: 0.018 },
+  { symbol: &#039;ICICIBANK&#039;, text: &#039;ICICI Bank reports strong deposit growth of 18% YoY in quarterly update.&#039;, impact: 0.011 },
+  { symbol: &#039;BHARTIARTL&#039;, text: &#039;Bharti Airtel expands 5G coverage to 200 additional towns, boosting ARPU.&#039;, impact: 0.009 },
+  { symbol: &#039;LTIM&#039;, text: &#039;LTIMindtree named a leader in digital engineering services by top research firm.&#039;, impact: 0.013 },
+  { symbol: &#039;SENSEX&#039;, text: &#039;FIIs pump in over ₹3,000 crores in Indian equities today, propelling index higher.&#039;, impact: 0.006, global: true },
+  
+  // Negative updates
+  { symbol: &#039;INFY&#039;, text: &#039;Infosys shares dip as corporate client delays major IT outsourcing spend.&#039;, impact: -0.012 },
+  { symbol: &#039;RELIANCE&#039;, text: &#039;Global crude oil price surge sparks concerns over refining margins for Reliance.&#039;, impact: -0.008 },
+  { symbol: &#039;HDFCBANK&#039;, text: &#039;HDFC Bank faces minor technical glitch in net banking; service restored.&#039;, impact: -0.004 },
+  { symbol: &#039;SBIN&#039;, text: &#039;SBI reports slight increase in gross NPAs; management reassures asset quality.&#039;, impact: -0.010 },
+  { symbol: &#039;ITC&#039;, text: &#039;GST Council discusses proposal to revise cess on luxury tobacco products.&#039;, impact: -0.015 },
+  { symbol: &#039;LTIM&#039;, text: &#039;LTIMindtree reports higher-than-expected attrition rate for the last quarter.&#039;, impact: -0.011 }
+];
+
+export class MarketSimulator {
+  constructor() {
+    this.stocks = {};
+    this.newsHistory = [];
+    this.init();
+  }
+
+  init() {
+    // Generate initial stocks state (Simulate all stocks defined in metadata)
+    Object.keys(STOCKS_METADATA).forEach(symbol =&gt; {
+      this.initStock(symbol);
+    });
+
+    // Populate initial global news
+    for (let i = 0; i &lt; 5; i++) {
+      const t = NEWS_TEMPLATES[Math.floor(Math.random() * NEWS_TEMPLATES.length)];
+      this.newsHistory.push({
+        id: Math.random().toString(36).substring(7),
+        symbol: t.symbol,
+        text: t.text,
+        sentiment: t.impact &gt; 0 ? &#039;bullish&#039; : &#039;bearish&#039;,
+        timestamp: new Date(Date.now() - (5 - i) * 60000)
+      });
+    }
+  }
+
+  // Initialize a stock and seed history
+  initStock(symbol, customName = null, customBase = null, customVolatility = null) {
+    const isSensex = symbol === &#039;SENSEX&#039;;
+    let meta = STOCKS_METADATA[symbol];
+    
+    // Fallback configurations for custom searched stocks
+    if (!meta) {
+      const sym = symbol.toUpperCase();
+      let hash = 0;
+      for (let i = 0; i &lt; sym.length; i++) {
+        hash = sym.charCodeAt(i) + ((hash &lt;&lt; 5) - hash);
+      }
+      
+      const basePrice = customBase || Math.abs(hash % 2000) + 150; // deterministically seed ₹150 - ₹2150
+      const volatility = customVolatility || 0.001 + (Math.abs(hash % 100) / 10000); // 0.001 - 0.002
+      const name = customName || `${sym} Industries Ltd.`;
+      
+      meta = { name, basePrice, volatility };
+    }
+
+    const history = [];
+    let currentPrice = meta.basePrice;
+    
+    // Seed 100 historical prices
+    for (let i = 0; i &lt; 100; i++) {
+      const change = (Math.random() - 0.49) * 2 * meta.volatility * currentPrice;
+      currentPrice += change;
+      history.push(currentPrice);
+    }
+
+    const openPrice = history[0];
+    const high = Math.max(...history);
+    const low = Math.min(...history);
+
+    this.stocks[symbol] = {
+      symbol,
+      name: meta.name,
+      price: currentPrice,
+      open: openPrice,
+      high: high,
+      low: low,
+      history: history,
+      volume: isSensex ? 120000000 : Math.floor(Math.random() * 5000000) + 1000000,
+      change: currentPrice - openPrice,
+      changePercent: ((currentPrice - openPrice) / openPrice) * 100,
+      indicators: generateSignal(history)
+    };
+  }
+
+  // Dynamically configure and add a stock searched by user
+  addDynamicStock(symbol, name = null) {
+    const sym = symbol.toUpperCase().trim();
+    
+    if (this.stocks[sym]) {
+      return this.stocks[sym];
+    }
+    
+    this.initStock(sym, name);
+    console.log(`[Simulator] Dynamically initialized search stock: ${sym}`);
+    return this.stocks[sym];
+  }
+
+  // Generate next tick for all active stocks
+  tick() {
+    const changes = {};
+    const sensexImpacts = [];
+
+    // Tick individual stocks
+    Object.keys(this.stocks).forEach(symbol =&gt; {
+      if (symbol === &#039;SENSEX&#039;) return;
+
+      const stock = this.stocks[symbol];
+      // Lookup volatility from metadata or calculate deterministically
+      let volatility = STOCKS_METADATA[symbol]?.volatility;
+      if (!volatility) {
+        let hash = 0;
+        for (let i = 0; i &lt; symbol.length; i++) {
+          hash = symbol.charCodeAt(i) + ((hash &lt;&lt; 5) - hash);
+        }
+        volatility = 0.001 + (Math.abs(hash % 100) / 10000);
+      }
+      
+      const changePercent = (Math.random() - 0.493) * 2 * volatility;
+      const priceChange = stock.price * changePercent;
+      
+      stock.price += priceChange;
+      stock.history.push(stock.price);
+      if (stock.history.length &gt; 120) stock.history.shift();
+
+      if (stock.price &gt; stock.high) stock.high = stock.price;
+      if (stock.price &lt; stock.low) stock.low = stock.price;
+      stock.volume += Math.floor(Math.random() * 15000);
+      stock.change = stock.price - stock.open;
+      stock.changePercent = (stock.change / stock.open) * 100;
+      
+      stock.indicators = generateSignal(stock.history);
+
+      sensexImpacts.push(changePercent);
+      changes[symbol] = { ...stock, history: undefined };
+    });
+
+    // Calculate SENSEX index movement
+    const sensex = this.stocks[&#039;SENSEX&#039;];
+    if (sensex) {
+      const avgComponentChange = sensexImpacts.reduce((sum, val) =&gt; sum + val, 0) / sensexImpacts.length;
+      const sensexChange = sensex.price * avgComponentChange;
+      
+      sensex.price += sensexChange;
+      sensex.history.push(sensex.price);
+      if (sensex.history.length &gt; 120) sensex.history.shift();
+
+      if (sensex.price &gt; sensex.high) sensex.high = sensex.price;
+      if (sensex.price &lt; sensex.low) sensex.low = sensex.price;
+      sensex.volume += Math.floor(Math.random() * 500000);
+      sensex.change = sensex.price - sensex.open;
+      sensex.changePercent = (sensex.change / sensex.open) * 100;
+      sensex.indicators = generateSignal(sensex.history);
+
+      changes[&#039;SENSEX&#039;] = { ...sensex, history: undefined };
+    }
+
+    return changes;
+  }
+
+  // Generate news event
+  generateNews() {
+    const activeSymbols = Object.keys(this.stocks).filter(s =&gt; s !== &#039;SENSEX&#039;);
+    // Draw from news templates, but dynamically adapt to custom symbols if template matches
+    const template = NEWS_TEMPLATES[Math.floor(Math.random() * NEWS_TEMPLATES.length)];
+    
+    // Choose stock affected. 80% chance it is the template stock, 20% it&#039;s another active stock
+    let targetSymbol = template.symbol;
+    if (Math.random() &gt; 0.8 || !this.stocks[targetSymbol]) {
+      targetSymbol = activeSymbols[Math.floor(Math.random() * activeSymbols.length)];
+    }
+
+    const id = Math.random().toString(36).substring(7);
+    const isBullish = template.impact &gt; 0;
+    
+    const text = template.symbol === targetSymbol 
+      ? template.text 
+      : template.text.replace(new RegExp(template.symbol, &#039;g&#039;), targetSymbol);
+
+    const newsEvent = {
+      id,
+      symbol: targetSymbol,
+      text,
+      sentiment: isBullish ? &#039;bullish&#039; : &#039;bearish&#039;,
+      timestamp: new Date()
+    };
+
+    this.newsHistory.unshift(newsEvent);
+    if (this.newsHistory.length &gt; 30) this.newsHistory.pop();
+
+    const stock = this.stocks[targetSymbol];
+    if (stock) {
+      const impactPrice = stock.price * template.impact;
+      stock.price += impactPrice;
+      stock.history.push(stock.price);
+      if (stock.history.length &gt; 120) stock.history.shift();
+      
+      if (stock.price &gt; stock.high) stock.high = stock.price;
+      if (stock.price &lt; stock.low) stock.low = stock.price;
+      stock.change = stock.price - stock.open;
+      stock.changePercent = (stock.change / stock.open) * 100;
+      stock.indicators = generateSignal(stock.history);
+    }
+
+    return { newsEvent, stockAffected: targetSymbol };
+  }
+
+  getFullState() {
+    return this.stocks;
+  }
+
+  getNews() {
+    return this.newsHistory;
+  }
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-2" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">// Helper function to calculate Exponential Moving Average (EMA)
+export const calculateEMA = (prices, period) =&gt; {
+  if (prices.length &lt; period) return null;
+  
+  const k = 2 / (period + 1);
+  // Start with SMA as the initial EMA value
+  let ema = prices.slice(0, period).reduce((sum, p) =&gt; sum + p, 0) / period;
+  
+  for (let i = period; i &lt; prices.length; i++) {
+    ema = prices[i] * k + ema * (1 - k);
+  }
+  return ema;
+};
+
+// Calculate Simple Moving Average (SMA)
+export const calculateSMA = (prices, period) =&gt; {
+  if (prices.length &lt; period) return null;
+  const slice = prices.slice(-period);
+  return slice.reduce((sum, p) =&gt; sum + p, 0) / period;
+};
+
+// Calculate Relative Strength Index (RSI)
+export const calculateRSI = (prices, period = 14) =&gt; {
+  if (prices.length &lt; period + 1) return 50; // Neutral default
+  
+  let gains = 0;
+  let losses = 0;
+  
+  // First window
+  for (let i = 1; i &lt;= period; i++) {
+    const diff = prices[i] - prices[i - 1];
+    if (diff &gt; 0) {
+      gains += diff;
+    } else {
+      losses -= diff;
+    }
+  }
+  
+  let avgGain = gains / period;
+  let avgLoss = losses / period;
+  
+  // Smooth the rest of the prices
+  for (let i = period + 1; i &lt; prices.length; i++) {
+    const diff = prices[i] - prices[i - 1];
+    if (diff &gt; 0) {
+      avgGain = (avgGain * (period - 1) + diff) / period;
+      avgLoss = (avgLoss * (period - 1)) / period;
+    } else {
+      avgGain = (avgGain * (period - 1)) / period;
+      avgLoss = (avgLoss * (period - 1) - diff) / period;
+    }
+  }
+  
+  if (avgLoss === 0) return 100;
+  const rs = avgGain / avgLoss;
+  return 100 - 100 / (1 + rs);
+};
+
+// Calculate MACD (Moving Average Convergence Divergence)
+// Returns { macd, signal, histogram }
+export const calculateMACD = (prices, shortPeriod = 12, longPeriod = 26, signalPeriod = 9) =&gt; {
+  if (prices.length &lt; longPeriod) {
+    return { macd: 0, signal: 0, histogram: 0 };
+  }
+  
+  // Calculate MACD line = EMA(12) - EMA(26) for the history
+  const macdLineHistory = [];
+  for (let i = longPeriod; i &lt;= prices.length; i++) {
+    const subset = prices.slice(0, i);
+    const emaShort = calculateEMA(subset, shortPeriod);
+    const emaLong = calculateEMA(subset, longPeriod);
+    macdLineHistory.push(emaShort - emaLong);
+  }
+  
+  // Calculate Signal line = EMA(9) of the MACD line history
+  const macd = macdLineHistory[macdLineHistory.length - 1];
+  const signal = calculateEMA(macdLineHistory, signalPeriod) || 0;
+  const histogram = macd - signal;
+  
+  return { macd, signal, histogram };
+};
+
+// Generate trading signals based on RSI, MACD, and SMA indicators
+export const generateSignal = (prices) =&gt; {
+  if (prices.length &lt; 30) {
+    return { signal: &#039;NEUTRAL&#039;, reason: &#039;Insufficient data points (Need 30+ ticks)&#039; };
+  }
+  
+  const currentPrice = prices[prices.length - 1];
+  const rsi = calculateRSI(prices, 14);
+  const { macd, signal: macdSignal, histogram } = calculateMACD(prices, 12, 26, 9);
+  const sma20 = calculateSMA(prices, 20);
+  const sma50 = calculateSMA(prices, 50);
+  
+  // Determine buy/sell indicators
+  let buyScore = 0;
+  let sellScore = 0;
+  const reasons = [];
+
+  // RSI rules
+  if (rsi &lt; 35) {
+    buyScore += 2;
+    reasons.push(`RSI is oversold (${rsi.toFixed(1)})`);
+  } else if (rsi &gt; 65) {
+    sellScore += 2;
+    reasons.push(`RSI is overbought (${rsi.toFixed(1)})`);
+  }
+
+  // MACD rules
+  if (macd &gt; macdSignal &amp;&amp; histogram &gt; 0) {
+    buyScore += 1;
+    reasons.push(&#039;MACD crossed above signal line&#039;);
+  } else if (macd &lt; macdSignal &amp;&amp; histogram &lt; 0) {
+    sellScore += 1;
+    reasons.push(&#039;MACD crossed below signal line&#039;);
+  }
+
+  // Moving Average rules
+  if (sma20 &amp;&amp; currentPrice &gt; sma20) {
+    buyScore += 1;
+  } else if (sma20 &amp;&amp; currentPrice &lt; sma20) {
+    sellScore += 1;
+  }
+  
+  if (sma20 &amp;&amp; sma50) {
+    if (sma20 &gt; sma50) {
+      buyScore += 1;
+      reasons.push(&#039;Golden cross bias (SMA 20 &gt; SMA 50)&#039;);
+    } else {
+      sellScore += 1;
+      reasons.push(&#039;Death cross bias (SMA 20 &lt; SMA 50)&#039;);
+    }
+  }
+
+  let finalSignal = &#039;NEUTRAL&#039;;
+  if (buyScore &gt;= 3 &amp;&amp; sellScore &lt; 2) {
+    finalSignal = &#039;BUY&#039;;
+  } else if (sellScore &gt;= 3 &amp;&amp; buyScore &lt; 2) {
+    finalSignal = &#039;SELL&#039;;
+  }
+
+  return {
+    signal: finalSignal,
+    rsi,
+    macd: { macd, signal: macdSignal, histogram },
+    sma20,
+    sma50,
+    reasons: reasons.length &gt; 0 ? reasons.slice(0, 2) : [&#039;No strong trend detected&#039;]
+  };
+};
+</code></pre>
+      </div>
+    
+      <div id="tab-3" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import mongoose from &#039;mongoose&#039;;
+
+// Disable buffering commands globally so that Mongoose fails immediately if disconnected
+// instead of hanging/buffering queries for 10 seconds.
+mongoose.set(&#039;bufferCommands&#039;, false);
+
+const mongoURI = process.env.MONGODB_URI || &#039;mongodb://127.0.0.1:27017/sensex_trader&#039;;
+
+export const connectDB = async () =&gt; {
+  try {
+    // Set a lower connection timeout for local testing (e.g. 2 seconds instead of 30)
+    await mongoose.connect(mongoURI, {
+      serverSelectionTimeoutMS: 2000 
+    });
+    console.log(&#039;MongoDB connected successfully to:&#039;, mongoURI);
+  } catch (error) {
+    console.error(&#039;MongoDB connection error:&#039;, error.message);
+    console.log(&#039;Using in-memory fallback mode since MongoDB service is offline.&#039;);
+  }
+};
+
+// Check if database is fully connected (readyState === 1)
+export const isDbConnected = () =&gt; {
+  return mongoose.connection.readyState === 1;
+};
+
+// New User Schema for authentication
+const UserSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  name: { type: String, required: true },
+  avatar: { type: String, default: &#039;blue&#039; }, // Avatar color theme: blue, emerald, purple, orange
+  tradingLevel: { type: String, default: &#039;Novice&#039; }, // Novice, Intermediate, Expert
+  createdAt: { type: Date, default: Date.now }
+});
+
+const HoldingSchema = new mongoose.Schema({
+  symbol: { type: String, required: true },
+  name: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  avgPrice: { type: Number, required: true }
+});
+
+const PortfolioSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: &#039;User&#039;, required: true },
+  balance: { type: Number, default: 1000000 },
+  holdings: [HoldingSchema]
+});
+
+const TransactionSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: &#039;User&#039;, required: true },
+  symbol: { type: String, required: true },
+  name: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  price: { type: Number, required: true },
+  type: { type: String, enum: [&#039;BUY&#039;, &#039;SELL&#039;], required: true },
+  timestamp: { type: Date, default: Date.now }
+});
+
+const WatchlistSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: &#039;User&#039;, required: true },
+  symbols: { type: [String], default: [&#039;SENSEX&#039;, &#039;RELIANCE&#039;, &#039;TCS&#039;, &#039;HDFCBANK&#039;, &#039;INFY&#039;] }
+});
+
+export const User = mongoose.model(&#039;User&#039;, UserSchema);
+export const Portfolio = mongoose.model(&#039;Portfolio&#039;, PortfolioSchema);
+export const Transaction = mongoose.model(&#039;Transaction&#039;, TransactionSchema);
+export const Watchlist = mongoose.model(&#039;Watchlist&#039;, WatchlistSchema);
+</code></pre>
+      </div>
+    
+      <div id="tab-4" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React, { useState, useEffect } from &#039;react&#039;;
+import io from &#039;socket.io-client&#039;;
+import { Activity, User, LogOut, LayoutDashboard, UserSquare2, RefreshCcw, Search, X } from &#039;lucide-react&#039;;
+import ChartSection from &#039;./components/ChartSection&#039;;
+import OrderForm from &#039;./components/OrderForm&#039;;
+import Portfolio from &#039;./components/Portfolio&#039;;
+import Watchlist from &#039;./components/Watchlist&#039;;
+import NewsFeed from &#039;./components/NewsFeed&#039;;
+import AuthModal from &#039;./components/AuthModal&#039;;
+import ProfileSection from &#039;./components/ProfileSection&#039;;
+import ChatBot from &#039;./components/ChatBot&#039;;
+
+const BACKEND_URL = &#039;http://localhost:5000&#039;;
+
+export default function App() {
+  const [token, setToken] = useState(localStorage.getItem(&#039;sensex_token&#039;));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem(&#039;sensex_user&#039;)));
+  const [view, setView] = useState(&#039;dashboard&#039;); // &#039;dashboard&#039; or &#039;profile&#039;
+  
+  const [stocks, setStocks] = useState({});
+  const [watchlist, setWatchlist] = useState([]);
+  const [news, setNews] = useState([]);
+  const [selectedSymbol, setSelectedSymbol] = useState(&#039;RELIANCE&#039;);
+  const [portfolio, setPortfolio] = useState({ balance: 1000000, holdings: [] });
+  const [transactions, setTransactions] = useState([]);
+  const [isConnected, setIsConnected] = useState(false);
+  const [flashStates, setFlashStates] = useState({});
+
+  // Search States
+  const [searchQuery, setSearchQuery] = useState(&#039;&#039;);
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Triggered when user successfully registers or logs in
+  const handleAuthSuccess = (newToken, newUser) =&gt; {
+    setToken(newToken);
+    setUser(newUser);
+    setView(&#039;dashboard&#039;);
+  };
+
+  const handleLogout = () =&gt; {
+    localStorage.removeItem(&#039;sensex_token&#039;);
+    localStorage.removeItem(&#039;sensex_user&#039;);
+    setToken(null);
+    setUser(null);
+    setPortfolio({ balance: 1000000, holdings: [] });
+    setTransactions([]);
+  };
+
+  useEffect(() =&gt; {
+    if (!token) return;
+
+    const fetchInitialData = async () =&gt; {
+      try {
+        const headers = { &#039;Authorization&#039;: `Bearer ${token}` };
+        
+        const [portfolioRes, transactionsRes, watchlistRes] = await Promise.all([
+          fetch(`${BACKEND_URL}/api/portfolio`, { headers }).then(res =&gt; res.json()),
+          fetch(`${BACKEND_URL}/api/transactions`, { headers }).then(res =&gt; res.json()),
+          fetch(`${BACKEND_URL}/api/watchlist`, { headers }).then(res =&gt; res.json())
+        ]);
+        
+        if (portfolioRes.error === &#039;Token expired or invalid&#039;) {
+          handleLogout();
+          return;
+        }
+
+        setPortfolio(portfolioRes);
+        setTransactions(transactionsRes);
+        setWatchlist(watchlistRes);
+      } catch (err) {
+        console.error(&#039;REST API initialization error:&#039;, err);
+      }
+    };
+    
+    fetchInitialData();
+
+    const socket = io(BACKEND_URL);
+
+    socket.on(&#039;connect&#039;, () =&gt; {
+      setIsConnected(true);
+    });
+
+    socket.on(&#039;disconnect&#039;, () =&gt; {
+      setIsConnected(false);
+    });
+
+    socket.on(&#039;initial-stocks&#039;, (initialStocks) =&gt; {
+      setStocks(initialStocks);
+    });
+
+    socket.on(&#039;initial-news&#039;, (initialNews) =&gt; {
+      setNews(initialNews);
+    });
+
+    socket.on(&#039;stock-ticks&#039;, (ticks) =&gt; {
+      setStocks((prevStocks) =&gt; {
+        const updatedStocks = { ...prevStocks };
+        const newFlashStates = {};
+
+        Object.keys(ticks).forEach((symbol) =&gt; {
+          if (prevStocks[symbol]) {
+            const prevPrice = prevStocks[symbol].price;
+            const newPrice = ticks[symbol].price;
+            
+            if (newPrice &gt; prevPrice) {
+              newFlashStates[symbol] = &#039;flash-up&#039;;
+            } else if (newPrice &lt; prevPrice) {
+              newFlashStates[symbol] = &#039;flash-down&#039;;
+            }
+
+            const history = [...(prevStocks[symbol].history || [])];
+            history.push(newPrice);
+            if (history.length &gt; 120) history.shift();
+
+            updatedStocks[symbol] = {
+              ...ticks[symbol],
+              history
+            };
+          } else {
+            updatedStocks[symbol] = ticks[symbol];
+          }
+        });
+
+        setFlashStates((prev) =&gt; ({ ...prev, ...newFlashStates }));
+        setTimeout(() =&gt; {
+          setFlashStates((prev) =&gt; {
+            const next = { ...prev };
+            Object.keys(newFlashStates).forEach((s) =&gt; delete next[s]);
+            return next;
+          });
+        }, 800);
+
+        return updatedStocks;
+      });
+    });
+
+    socket.on(&#039;news-update&#039;, ({ newsEvent, stockAffected }) =&gt; {
+      setNews((prevNews) =&gt; [newsEvent, ...prevNews].slice(0, 30));
+    });
+
+    return () =&gt; {
+      socket.disconnect();
+    };
+  }, [token]);
+
+  // Search input change handler
+  const handleSearchChange = async (e) =&gt; {
+    const val = e.target.value;
+    setSearchQuery(val);
+    if (!val.trim()) {
+      setSearchResults([]);
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/stocks/search?q=${val}`);
+      const data = await response.json();
+      setSearchResults(data);
+    } catch (err) {
+      console.error(&#039;Failed to search stocks:&#039;, err);
+    }
+  };
+
+  // Select a searched stock
+  const handleSelectSearchedStock = (stock) =&gt; {
+    setStocks((prev) =&gt; {
+      if (prev[stock.symbol]) return prev;
+      return {
+        ...prev,
+        [stock.symbol]: stock
+      };
+    });
+    setSelectedSymbol(stock.symbol);
+    setView(&#039;dashboard&#039;);
+    setSearchQuery(&#039;&#039;);
+    setSearchResults([]);
+  };
+
+  // Search submit on Enter press
+  const handleSearchKeyDown = async (e) =&gt; {
+    if (e.key === &#039;Enter&#039; &amp;&amp; searchQuery.trim()) {
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/stocks/search?q=${searchQuery}`);
+        const data = await response.json();
+        if (data.length &gt; 0) {
+          handleSelectSearchedStock(data[0]);
+        }
+      } catch (err) {
+        console.error(&#039;Search submit error:&#039;, err);
+      }
+    }
+  };
+
+  // Update watchlist CRUD with Auth Header
+  const handleUpdateWatchlist = async (newWatchlist) =&gt; {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/watchlist`, {
+        method: &#039;POST&#039;,
+        headers: { 
+          &#039;Content-Type&#039;: &#039;application/json&#039;,
+          &#039;Authorization&#039;: `Bearer ${token}`
+        },
+        body: JSON.stringify({ symbols: newWatchlist })
+      });
+      const data = await response.json();
+      setWatchlist(data);
+    } catch (error) {
+      console.error(&#039;Failed to update watchlist:&#039;, error);
+    }
+  };
+
+  // Execute trade with Auth Header
+  const handleExecuteTrade = async ({ symbol, quantity, type, price }) =&gt; {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/trade`, {
+        method: &#039;POST&#039;,
+        headers: { 
+          &#039;Content-Type&#039;: &#039;application/json&#039;,
+          &#039;Authorization&#039;: `Bearer ${token}`
+        },
+        body: JSON.stringify({ symbol, quantity, type, price })
+      });
+      const result = await response.json();
+      if (result.success) {
+        setPortfolio(result.portfolio);
+        setTransactions((prev) =&gt; [result.transaction, ...prev]);
+        return { success: true };
+      } else {
+        return { success: false, error: result.error };
+      }
+    } catch (error) {
+      return { success: false, error: &#039;Server connection failed.&#039; };
+    }
+  };
+
+  // Reset virtual cash portfolio
+  const handleResetPortfolio = async () =&gt; {
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/portfolio/reset`, {
+        method: &#039;POST&#039;,
+        headers: { &#039;Authorization&#039;: `Bearer ${token}` }
+      });
+      const data = await response.json();
+      setPortfolio(data);
+      setTransactions([]);
+    } catch (error) {
+      console.error(&#039;Failed to reset portfolio:&#039;, error);
+    }
+  };
+
+  // If token is missing, force login modal overlay
+  if (!token) {
+    return &lt;AuthModal onAuthSuccess={handleAuthSuccess} /&gt;;
+  }
+
+  const sensexStock = stocks[&#039;SENSEX&#039;];
+  const isSensexUp = sensexStock ? sensexStock.changePercent &gt;= 0 : true;
+
+  const getHeaderAvatarClass = (color) =&gt; {
+    switch (color) {
+      case &#039;emerald&#039;: return &#039;bg-emerald-500/20 text-emerald-400 border-emerald-500/30&#039;;
+      case &#039;purple&#039;: return &#039;bg-purple-500/20 text-purple-400 border-purple-500/30&#039;;
+      case &#039;orange&#039;: return &#039;bg-orange-500/20 text-orange-400 border-orange-500/30&#039;;
+      default: return &#039;bg-blue-500/20 text-blue-400 border-blue-500/30&#039;;
+    }
+  };
+
+  return (
+    &lt;div className=&quot;min-h-screen bg-[#070b13] pb-10 text-slate-100 flex flex-col selection:bg-blue-500/30 selection:text-blue-200&quot;&gt;
+      
+      {/* Ticker Bar Marquee */}
+      &lt;div className=&quot;bg-[#0b0f19]/80 border-b border-slate-900/60 backdrop-blur-md h-9 overflow-hidden flex items-center z-10&quot;&gt;
+        &lt;div className=&quot;animate-marquee whitespace-nowrap flex gap-8 select-none&quot;&gt;
+          {Object.keys(stocks).map((symbol) =&gt; {
+            const s = stocks[symbol];
+            if (symbol === &#039;SENSEX&#039;) return null;
+            const isUp = s.changePercent &gt;= 0;
+            return (
+              &lt;span 
+                key={symbol} 
+                onClick={() =&gt; { setSelectedSymbol(symbol); setView(&#039;dashboard&#039;); }}
+                className={`inline-flex items-center gap-1.5 cursor-pointer text-xs font-semibold px-2 py-0.5 rounded transition-all hover:bg-slate-800/40 ${flashStates[symbol] || &#039;&#039;}`}
+              &gt;
+                &lt;span className=&quot;text-slate-400 font-bold&quot;&gt;{symbol}&lt;/span&gt;
+                &lt;span className=&quot;text-white&quot;&gt;₹{s.price.toFixed(2)}&lt;/span&gt;
+                &lt;span className={`text-[10px] ${isUp ? &#039;text-emerald-400&#039; : &#039;text-rose-400&#039;}`}&gt;
+                  {isUp ? &#039;▲&#039; : &#039;▼&#039;}{Math.abs(s.changePercent).toFixed(2)}%
+                &lt;/span&gt;
+              &lt;/span&gt;
+            );
+          })}
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* Main Header */}
+      &lt;header className=&quot;glass-panel border-t-0 border-x-0 py-4 px-6 sticky top-0 z-20 backdrop-blur-md flex items-center justify-between&quot;&gt;
+        &lt;div className=&quot;flex items-center gap-6 flex-1&quot;&gt;
+          
+          {/* Logo */}
+          &lt;div className=&quot;flex items-center gap-3 cursor-pointer&quot; onClick={() =&gt; setView(&#039;dashboard&#039;)}&gt;
+            &lt;div className=&quot;h-9 w-9 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/20&quot;&gt;
+              &lt;Activity className=&quot;h-5 w-5 text-white animate-pulse&quot; /&gt;
+            &lt;/div&gt;
+            &lt;div className=&quot;hidden sm:block&quot;&gt;
+              &lt;h1 className=&quot;text-base font-extrabold tracking-tight bg-gradient-to-r from-slate-50 via-slate-100 to-slate-300 bg-clip-text text-transparent leading-none&quot;&gt;
+                SENSEX LIVE TRADER
+              &lt;/h1&gt;
+              &lt;p className=&quot;text-[9px] text-slate-500 font-bold tracking-wider uppercase mt-1&quot;&gt;BSE Simulated Exchange&lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          {/* New Search Input */}
+          &lt;div className=&quot;relative w-48 sm:w-64 lg:w-80 z-30&quot;&gt;
+            &lt;div className=&quot;flex items-center gap-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800/75 focus-within:border-blue-500 transition-colors&quot;&gt;
+              &lt;Search className=&quot;h-3.5 w-3.5 text-slate-500&quot; /&gt;
+              &lt;input
+                type=&quot;text&quot;
+                placeholder=&quot;Search stocks (Tata, SBI, Zomato)...&quot;
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onKeyDown={handleSearchKeyDown}
+                className=&quot;bg-transparent border-none outline-none text-[10px] sm:text-xs text-slate-200 w-full placeholder-slate-600 font-semibold&quot;
+              /&gt;
+              {searchQuery &amp;&amp; (
+                &lt;button onClick={() =&gt; { setSearchQuery(&#039;&#039;); setSearchResults([]); }} className=&quot;text-slate-500 hover:text-white cursor-pointer&quot;&gt;
+                  &lt;X className=&quot;h-3 w-3&quot; /&gt;
+                &lt;/button&gt;
+              )}
+            &lt;/div&gt;
+
+            {/* Dropdown Results Overlay */}
+            {searchResults.length &gt; 0 &amp;&amp; (
+              &lt;div className=&quot;absolute left-0 right-0 mt-2 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl z-50 p-2 text-[10px] sm:text-xs max-h-60 overflow-y-auto&quot;&gt;
+                {searchResults.map((stock) =&gt; (
+                  &lt;button
+                    key={stock.symbol}
+                    onClick={() =&gt; handleSelectSearchedStock(stock)}
+                    className=&quot;w-full flex items-center justify-between px-3 py-2 rounded-xl hover:bg-slate-800 text-left transition-colors cursor-pointer group&quot;
+                  &gt;
+                    &lt;div&gt;
+                      &lt;span className=&quot;font-extrabold text-white group-hover:text-blue-400 transition-colors&quot;&gt;{stock.symbol}&lt;/span&gt;
+                      &lt;span className=&quot;text-[9px] sm:text-[10px] text-slate-500 ml-2&quot;&gt;{stock.name}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;span className=&quot;font-bold text-slate-300&quot;&gt;₹{stock.price.toFixed(2)}&lt;/span&gt;
+                  &lt;/button&gt;
+                ))}
+              &lt;/div&gt;
+            )}
+          &lt;/div&gt;
+
+          {/* Navigation links */}
+          &lt;div className=&quot;hidden md:flex items-center gap-2 bg-slate-900/60 p-1 rounded-xl border border-slate-800/80 text-xs&quot;&gt;
+            &lt;button
+              onClick={() =&gt; setView(&#039;dashboard&#039;)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all ${
+                view === &#039;dashboard&#039; ? &#039;bg-slate-800 text-white shadow-sm&#039; : &#039;text-slate-400 hover:text-slate-200&#039;
+              }`}
+            &gt;
+              &lt;LayoutDashboard className=&quot;h-3.5 w-3.5&quot; /&gt;
+              &lt;span&gt;Dashboard&lt;/span&gt;
+            &lt;/button&gt;
+            
+            &lt;button
+              onClick={() =&gt; setView(&#039;profile&#039;)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-all ${
+                view === &#039;profile&#039; ? &#039;bg-slate-800 text-white shadow-sm&#039; : &#039;text-slate-400 hover:text-slate-200&#039;
+              }`}
+            &gt;
+              &lt;UserSquare2 className=&quot;h-3.5 w-3.5&quot; /&gt;
+              &lt;span&gt;My Profile Stats&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* User Card, Index update &amp; Sign Out */}
+        &lt;div className=&quot;flex items-center gap-4 sm:gap-6 ml-3&quot;&gt;
+          {sensexStock &amp;&amp; (
+            &lt;div className=&quot;hidden lg:flex flex-col items-end&quot;&gt;
+              &lt;span className=&quot;text-[10px] text-slate-500 font-semibold uppercase&quot;&gt;BSE SENSEX&lt;/span&gt;
+              &lt;div className=&quot;flex items-center gap-1.5 mt-0.5&quot;&gt;
+                &lt;span className=&quot;text-sm font-black text-white&quot;&gt;₹{sensexStock.price.toFixed(2)}&lt;/span&gt;
+                &lt;span className={`text-xs font-bold ${isSensexUp ? &#039;text-emerald-400&#039; : &#039;text-rose-400&#039;}`}&gt;
+                  {isSensexUp ? &#039;+&#039; : &#039;&#039;}{sensexStock.changePercent.toFixed(2)}%
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          )}
+
+          {/* User badge and Log Out */}
+          &lt;div className=&quot;flex items-center gap-3 border-l border-slate-800/85 pl-4 sm:pl-6&quot;&gt;
+            &lt;button 
+              onClick={() =&gt; setView(&#039;profile&#039;)}
+              className=&quot;flex items-center gap-2 group text-left cursor-pointer&quot;
+            &gt;
+              &lt;div className={`h-8 w-8 rounded-full border flex items-center justify-center transition-colors group-hover:bg-slate-800 ${getHeaderAvatarClass(user?.avatar)}`}&gt;
+                &lt;User className=&quot;h-4 w-4&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;hidden sm:block&quot;&gt;
+                &lt;div className=&quot;text-xs font-extrabold text-white leading-none group-hover:text-blue-400 transition-colors&quot;&gt;{user?.name}&lt;/div&gt;
+                &lt;div className=&quot;text-[9px] text-slate-500 font-bold uppercase mt-0.5&quot;&gt;{user?.tradingLevel}&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/button&gt;
+
+            &lt;button
+              onClick={handleLogout}
+              className=&quot;text-slate-500 hover:text-rose-400 p-1.5 hover:bg-slate-800/40 rounded-xl transition-all cursor-pointer&quot;
+              title=&quot;Sign Out&quot;
+            &gt;
+              &lt;LogOut className=&quot;h-4 w-4&quot; /&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/header&gt;
+
+      {/* Main Grid Content */}
+      &lt;div className=&quot;max-w-7xl mx-auto w-full px-4 sm:px-6 mt-6&quot;&gt;
+        
+        {/* Navigation tabs for smaller devices */}
+        &lt;div className=&quot;md:hidden flex bg-slate-900/60 p-1 rounded-xl border border-slate-800/85 mb-6 text-xs&quot;&gt;
+          &lt;button
+            onClick={() =&gt; setView(&#039;dashboard&#039;)}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg font-bold transition-all ${
+              view === &#039;dashboard&#039; ? &#039;bg-slate-800 text-white shadow-sm&#039; : &#039;text-slate-400&#039;
+            }`}
+          &gt;
+            &lt;LayoutDashboard className=&quot;h-3.5 w-3.5&quot; /&gt;
+            &lt;span&gt;Dashboard&lt;/span&gt;
+          &lt;/button&gt;
+          
+          &lt;button
+            onClick={() =&gt; setView(&#039;profile&#039;)}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg font-bold transition-all ${
+              view === &#039;profile&#039; ? &#039;bg-slate-800 text-white shadow-sm&#039; : &#039;text-slate-400&#039;
+            }`}
+          &gt;
+            &lt;UserSquare2 className=&quot;h-3.5 w-3.5&quot; /&gt;
+            &lt;span&gt;My Profile&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        {view === &#039;dashboard&#039; ? (
+          &lt;div className=&quot;grid grid-cols-1 lg:grid-cols-12 gap-6&quot;&gt;
+            
+            {/* Left Side: Chart &amp; Portfolio */}
+            &lt;div className=&quot;lg:col-span-8 space-y-6&quot;&gt;
+              &lt;ChartSection 
+                stock={stocks[selectedSymbol]} 
+                history={stocks[selectedSymbol]?.history || []} 
+              /&gt;
+              
+              &lt;Portfolio 
+                portfolio={portfolio} 
+                stocks={stocks} 
+                transactions={transactions} 
+                onReset={handleResetPortfolio} 
+                onSelectStock={setSelectedSymbol}
+              /&gt;
+            &lt;/div&gt;
+
+            {/* Right Side: Order form, Watchlist, News */}
+            &lt;div className=&quot;lg:col-span-4 space-y-6&quot;&gt;
+              
+              &lt;OrderForm 
+                stock={stocks[selectedSymbol]} 
+                portfolio={portfolio} 
+                onExecuteTrade={handleExecuteTrade} 
+              /&gt;
+              
+              &lt;Watchlist 
+                watchlist={watchlist} 
+                stocks={stocks} 
+                onUpdateWatchlist={handleUpdateWatchlist} 
+                selectedSymbol={selectedSymbol} 
+                onSelectStock={setSelectedSymbol} 
+              /&gt;
+
+              &lt;NewsFeed 
+                news={news} 
+                onSelectStock={setSelectedSymbol} 
+              /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        ) : (
+          // Profile statistics section view
+          &lt;ProfileSection
+            user={user}
+            portfolio={portfolio}
+            transactions={transactions}
+            onUpdateProfile={setUser}
+          /&gt;
+        )}
+      &lt;/div&gt;
+
+      {/* Floating AI Chatbot Assistant */}
+      &lt;ChatBot /&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-5" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-css">@import &quot;tailwindcss&quot;;
+
+@layer base {
+  body {
+    background-color: #0b0f19; /* Deep dark space */
+    color: #f3f4f6;
+    font-family: &#039;Inter&#039;, system-ui, -apple-system, BlinkMacSystemFont, &#039;Segoe UI&#039;, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* Glow Classes */
+.glow-green {
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+.glow-red {
+  text-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+}
+
+.glow-blue {
+  text-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+/* Glassmorphism Panel */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel-interactive {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel-interactive:hover {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+/* Indicator Bulbs */
+.pulse-glow-green {
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
+.pulse-glow-red {
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+}
+
+.pulse-glow-blue {
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+/* Ticker marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Up/Down value flash transitions */
+@keyframes flash-green {
+  0% { background-color: rgba(34, 197, 94, 0.25); }
+  100% { background-color: transparent; }
+}
+
+@keyframes flash-red {
+  0% { background-color: rgba(239, 68, 68, 0.25); }
+  100% { background-color: transparent; }
+}
+
+.flash-up {
+  animation: flash-green 0.8s ease-out;
+}
+
+.flash-down {
+  animation: flash-red 0.8s ease-out;
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-6" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React, { useState } from &#039;react&#039;;
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, ReferenceLine, LineChart, Line, Legend } from &#039;recharts&#039;;
+import { Info, TrendingUp, TrendingDown, Layers } from &#039;lucide-react&#039;;
+
+export default function ChartSection({ stock, history }) {
+  const [activeTab, setActiveTab] = useState(&#039;price&#039;); // &#039;price&#039;, &#039;rsi&#039;, &#039;macd&#039;
+  const [showSMA, setShowSMA] = useState(true);
+
+  if (!stock || !history || history.length === 0) {
+    return (
+      &lt;div className=&quot;glass-panel rounded-2xl h-[400px] flex items-center justify-center text-slate-400&quot;&gt;
+        &lt;div className=&quot;text-center&quot;&gt;
+          &lt;Layers className=&quot;mx-auto h-12 w-12 text-slate-500 animate-pulse mb-3&quot; /&gt;
+          &lt;p className=&quot;text-sm&quot;&gt;Select a stock to load live interactive chart&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    );
+  }
+
+  // Map history numbers into objects for Recharts
+  const data = history.map((price, idx) =&gt; {
+    // Generate simple SMA values for the chart if not already calculated
+    let sma20Val = null;
+    let sma50Val = null;
+
+    if (idx &gt;= 20) {
+      const slice = history.slice(idx - 20, idx);
+      sma20Val = slice.reduce((a, b) =&gt; a + b, 0) / 20;
+    }
+    if (idx &gt;= 50) {
+      const slice = history.slice(idx - 50, idx);
+      sma50Val = slice.reduce((a, b) =&gt; a + b, 0) / 50;
+    }
+
+    return {
+      index: idx,
+      price: Number(price.toFixed(2)),
+      sma20: sma20Val ? Number(sma20Val.toFixed(2)) : null,
+      sma50: sma50Val ? Number(sma50Val.toFixed(2)) : null,
+      time: new Date(Date.now() - (history.length - idx) * 1500).toLocaleTimeString([], { hour: &#039;2-digit&#039;, minute: &#039;2-digit&#039;, second: &#039;2-digit&#039; })
+    };
+  });
+
+  const isUp = stock.changePercent &gt;= 0;
+  const signal = stock.indicators?.signal || &#039;NEUTRAL&#039;;
+  const signalReasons = stock.indicators?.reasons || [];
+  const rsiValue = stock.indicators?.rsi || 50;
+  const macdData = stock.indicators?.macd || { macd: 0, signal: 0, histogram: 0 };
+
+  const getSignalColor = (sig) =&gt; {
+    if (sig === &#039;BUY&#039;) return &#039;bg-emerald-500/20 text-emerald-400 border-emerald-500/30&#039;;
+    if (sig === &#039;SELL&#039;) return &#039;bg-rose-500/20 text-rose-400 border-rose-500/30&#039;;
+    return &#039;bg-slate-500/20 text-slate-400 border-slate-500/30&#039;;
+  };
+
+  const getSignalBadgeText = (sig) =&gt; {
+    if (sig === &#039;BUY&#039;) return &#039;STRONG BUY&#039;;
+    if (sig === &#039;SELL&#039;) return &#039;STRONG SELL&#039;;
+    return &#039;NEUTRAL / HOLD&#039;;
+  };
+
+  // Custom tooltips
+  const CustomTooltip = ({ active, payload }) =&gt; {
+    if (active &amp;&amp; payload &amp;&amp; payload.length) {
+      return (
+        &lt;div className=&quot;bg-slate-900/90 border border-slate-700/50 p-3 rounded-lg shadow-xl text-xs backdrop-blur-md&quot;&gt;
+          &lt;p className=&quot;text-slate-400 font-semibold mb-1&quot;&gt;{payload[0].payload.time}&lt;/p&gt;
+          &lt;p className=&quot;text-slate-100 font-bold&quot;&gt;Price: &lt;span className=&quot;text-blue-400&quot;&gt;₹{payload[0].value}&lt;/span&gt;&lt;/p&gt;
+          {showSMA &amp;&amp; payload[1] &amp;&amp; &lt;p className=&quot;text-emerald-400&quot;&gt;SMA 20: ₹{payload[1].value}&lt;/p&gt;}
+          {showSMA &amp;&amp; payload[2] &amp;&amp; &lt;p className=&quot;text-orange-400&quot;&gt;SMA 50: ₹{payload[2].value}&lt;/p&gt;}
+        &lt;/div&gt;
+      );
+    };
+    return null;
+  };
+
+  return (
+    &lt;div className=&quot;glass-panel rounded-2xl p-5 flex flex-col justify-between h-[450px]&quot;&gt;
+      {/* Header Info */}
+      &lt;div className=&quot;flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-4 mb-4&quot;&gt;
+        &lt;div&gt;
+          &lt;div className=&quot;flex items-center gap-2&quot;&gt;
+            &lt;h2 className=&quot;text-xl font-bold tracking-tight text-white&quot;&gt;{stock.symbol}&lt;/h2&gt;
+            &lt;span className=&quot;text-xs text-slate-400 bg-slate-800 px-2 py-0.5 rounded&quot;&gt;{stock.name}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;flex items-baseline gap-2 mt-1&quot;&gt;
+            &lt;span className=&quot;text-2xl font-extrabold text-slate-50&quot;&gt;₹{stock.price.toFixed(2)}&lt;/span&gt;
+            &lt;span className={`text-sm font-semibold flex items-center ${isUp ? &#039;text-emerald-400&#039; : &#039;text-rose-400&#039;}`}&gt;
+              {isUp ? &lt;TrendingUp className=&quot;h-3 w-3 mr-0.5&quot; /&gt; : &lt;TrendingDown className=&quot;h-3 w-3 mr-0.5&quot; /&gt;}
+              {isUp ? &#039;+&#039; : &#039;&#039;}{stock.changePercent.toFixed(2)}%
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Signal &amp; Indicators info */}
+        &lt;div className=&quot;flex items-center gap-3&quot;&gt;
+          &lt;div className=&quot;text-right&quot;&gt;
+            &lt;span className=&quot;text-xs text-slate-500 block&quot;&gt;AI trading signal&lt;/span&gt;
+            &lt;div className={`mt-1 text-xs font-bold px-2.5 py-1 rounded-full border ${getSignalColor(signal)}`}&gt;
+              {getSignalBadgeText(signal)}
+            &lt;/div&gt;
+          &lt;/div&gt;
+          
+          &lt;div className=&quot;max-w-[180px] bg-slate-800/40 rounded-lg p-2 border border-slate-700/30 text-[10px] text-slate-400&quot;&gt;
+            &lt;div className=&quot;flex items-center gap-1 font-semibold text-slate-300 mb-1&quot;&gt;
+              &lt;Info className=&quot;h-3 w-3 text-blue-400&quot; /&gt;
+              &lt;span&gt;Signal Analysis&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p className=&quot;line-clamp-2&quot;&gt;{signalReasons.join(&#039;, &#039;) || &#039;Indicators consolidated in range.&#039;}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* Chart Toggles */}
+      &lt;div className=&quot;flex items-center justify-between mb-2&quot;&gt;
+        &lt;div className=&quot;flex gap-1 bg-slate-900/60 p-1 rounded-lg border border-slate-800&quot;&gt;
+          &lt;button
+            onClick={() =&gt; setActiveTab(&#039;price&#039;)}
+            className={`text-xs px-3 py-1.5 rounded-md font-medium transition-all ${activeTab === &#039;price&#039; ? &#039;bg-slate-800 text-white shadow-sm&#039; : &#039;text-slate-400 hover:text-slate-200&#039;}`}
+          &gt;
+            Price Chart
+          &lt;/button&gt;
+          &lt;button
+            onClick={() =&gt; setActiveTab(&#039;rsi&#039;)}
+            className={`text-xs px-3 py-1.5 rounded-md font-medium transition-all ${activeTab === &#039;rsi&#039; ? &#039;bg-slate-800 text-white shadow-sm&#039; : &#039;text-slate-400 hover:text-slate-200&#039;}`}
+          &gt;
+            RSI ({rsiValue.toFixed(1)})
+          &lt;/button&gt;
+          &lt;button
+            onClick={() =&gt; setActiveTab(&#039;macd&#039;)}
+            className={`text-xs px-3 py-1.5 rounded-md font-medium transition-all ${activeTab === &#039;macd&#039; ? &#039;bg-slate-800 text-white shadow-sm&#039; : &#039;text-slate-400 hover:text-slate-200&#039;}`}
+          &gt;
+            MACD Histogram
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        {activeTab === &#039;price&#039; &amp;&amp; (
+          &lt;label className=&quot;flex items-center gap-1.5 cursor-pointer select-none&quot;&gt;
+            &lt;input
+              type=&quot;checkbox&quot;
+              checked={showSMA}
+              onChange={() =&gt; setShowSMA(!showSMA)}
+              className=&quot;accent-blue-500 rounded h-3 w-3&quot;
+            /&gt;
+            &lt;span className=&quot;text-[10px] font-semibold text-slate-400&quot;&gt;Show Moving Averages (20/50)&lt;/span&gt;
+          &lt;/label&gt;
+        )}
+      &lt;/div&gt;
+
+      {/* Main Responsive Chart Container */}
+      &lt;div className=&quot;flex-1 w-full min-h-0&quot;&gt;
+        &lt;ResponsiveContainer width=&quot;100%&quot; height=&quot;100%&quot;&gt;
+          {activeTab === &#039;price&#039; ? (
+            &lt;AreaChart data={data} margin={{ top: 5, right: 5, left: -25, bottom: 5 }}&gt;
+              &lt;defs&gt;
+                &lt;linearGradient id=&quot;colorPrice&quot; x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;0&quot; y2=&quot;1&quot;&gt;
+                  &lt;stop offset=&quot;5%&quot; stopColor={isUp ? &#039;#10b981&#039; : &#039;#ef4444&#039;} stopOpacity={0.2} /&gt;
+                  &lt;stop offset=&quot;95%&quot; stopColor={isUp ? &#039;#10b981&#039; : &#039;#ef4444&#039;} stopOpacity={0.0} /&gt;
+                &lt;/linearGradient&gt;
+              &lt;/defs&gt;
+              &lt;XAxis dataKey=&quot;time&quot; hide /&gt;
+              &lt;YAxis domain={[&#039;auto&#039;, &#039;auto&#039;]} tick={{ fill: &#039;#64748b&#039;, fontSize: 10 }} /&gt;
+              &lt;Tooltip content={&lt;CustomTooltip /&gt;} /&gt;
+              &lt;Area
+                type=&quot;monotone&quot;
+                dataKey=&quot;price&quot;
+                stroke={isUp ? &#039;#10b981&#039; : &#039;#ef4444&#039;}
+                strokeWidth={2.5}
+                fillOpacity={1}
+                fill=&quot;url(#colorPrice)&quot;
+                dot={false}
+              /&gt;
+              {showSMA &amp;&amp; (
+                &lt;Line
+                  type=&quot;monotone&quot;
+                  dataKey=&quot;sma20&quot;
+                  stroke=&quot;#34d399&quot;
+                  strokeWidth={1.2}
+                  strokeDasharray=&quot;4 4&quot;
+                  dot={false}
+                /&gt;
+              )}
+              {showSMA &amp;&amp; (
+                &lt;Line
+                  type=&quot;monotone&quot;
+                  dataKey=&quot;sma50&quot;
+                  stroke=&quot;#fb923c&quot;
+                  strokeWidth={1.2}
+                  strokeDasharray=&quot;3 3&quot;
+                  dot={false}
+                /&gt;
+              )}
+            &lt;/AreaChart&gt;
+          ) : activeTab === &#039;rsi&#039; ? (
+            &lt;LineChart data={data.map((d, i) =&gt; ({ ...d, rsi: history.slice(0, i + 1).length &gt;= 14 ? d.price : 50 }))} margin={{ top: 5, right: 5, left: -25, bottom: 5 }}&gt;
+              {/* RSI Chart */}
+              &lt;XAxis dataKey=&quot;time&quot; hide /&gt;
+              &lt;YAxis domain={[0, 100]} tick={{ fill: &#039;#64748b&#039;, fontSize: 10 }} /&gt;
+              &lt;Tooltip /&gt;
+              &lt;ReferenceLine y={70} stroke=&quot;#f43f5e&quot; strokeDasharray=&quot;3 3&quot; label={{ value: &#039;Overbought (70)&#039;, fill: &#039;#f43f5e&#039;, fontSize: 8, position: &#039;insideTopLeft&#039; }} /&gt;
+              &lt;ReferenceLine y={30} stroke=&quot;#10b981&quot; strokeDasharray=&quot;3 3&quot; label={{ value: &#039;Oversold (30)&#039;, fill: &#039;#10b981&#039;, fontSize: 8, position: &#039;insideBottomLeft&#039; }} /&gt;
+              &lt;ReferenceLine y={50} stroke=&quot;#475569&quot; strokeDasharray=&quot;5 5&quot; /&gt;
+              &lt;Line
+                type=&quot;monotone&quot;
+                data={data.map((d, idx) =&gt; ({ ...d, rsiValue: idx &gt;= 14 ? rsiValue : 50 }))}
+                dataKey=&quot;rsiValue&quot;
+                stroke=&quot;#a855f7&quot;
+                strokeWidth={2}
+                dot={false}
+              /&gt;
+            &lt;/LineChart&gt;
+          ) : (
+            &lt;AreaChart data={data.map((d) =&gt; ({ ...d, hist: macdData.histogram }))} margin={{ top: 5, right: 5, left: -25, bottom: 5 }}&gt;
+              {/* MACD Chart */}
+              &lt;XAxis dataKey=&quot;time&quot; hide /&gt;
+              &lt;YAxis domain={[&#039;auto&#039;, &#039;auto&#039;]} tick={{ fill: &#039;#64748b&#039;, fontSize: 10 }} /&gt;
+              &lt;Tooltip /&gt;
+              &lt;ReferenceLine y={0} stroke=&quot;#475569&quot; /&gt;
+              &lt;Area
+                type=&quot;monotone&quot;
+                dataKey=&quot;hist&quot;
+                stroke=&quot;#3b82f6&quot;
+                fill=&quot;#3b82f6&quot;
+                fillOpacity={0.3}
+                dot={false}
+              /&gt;
+            &lt;/AreaChart&gt;
+          )}
+        &lt;/ResponsiveContainer&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-7" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React, { useState, useEffect } from &#039;react&#039;;
+import { ShoppingBag, ArrowUpRight, ArrowDownRight, DollarSign, Wallet } from &#039;lucide-react&#039;;
+
+export default function OrderForm({ stock, portfolio, onExecuteTrade }) {
+  const [tradeType, setTradeType] = useState(&#039;BUY&#039;); // BUY or SELL
+  const [orderType, setOrderType] = useState(&#039;MARKET&#039;); // MARKET or LIMIT
+  const [quantity, setQuantity] = useState(10);
+  const [limitPrice, setLimitPrice] = useState(0);
+  const [takeProfitPercent, setTakeProfitPercent] = useState(0); // 0 means disabled, e.g. 5%, 10%
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(&#039;&#039;);
+  const [successMsg, setSuccessMsg] = useState(&#039;&#039;);
+
+  // Update limit price default when stock changes
+  useEffect(() =&gt; {
+    if (stock) {
+      setLimitPrice(Number(stock.price.toFixed(2)));
+      setErrorMsg(&#039;&#039;);
+      setSuccessMsg(&#039;&#039;);
+    }
+  }, [stock]);
+
+  if (!stock || stock.symbol === &#039;SENSEX&#039;) {
+    return (
+      &lt;div className=&quot;glass-panel rounded-2xl p-5 text-center text-slate-400 text-sm&quot;&gt;
+        Select an individual stock (non-index) to execute paper trading orders.
+      &lt;/div&gt;
+    );
+  }
+
+  const livePrice = stock.price;
+  const executionPrice = orderType === &#039;LIMIT&#039; ? Number(limitPrice) : Number(livePrice);
+  const estTotal = quantity * executionPrice;
+  const balance = portfolio?.balance || 1000000;
+  
+  // Find currently owned shares
+  const holding = portfolio?.holdings?.find(h =&gt; h.symbol === stock.symbol);
+  const ownedQty = holding ? holding.quantity : 0;
+
+  // Calculate profit points (Target Profit Price)
+  const targetProfitPrice = takeProfitPercent &gt; 0 
+    ? executionPrice * (1 + takeProfitPercent / 100) 
+    : 0;
+  const expectedProfit = takeProfitPercent &gt; 0 
+    ? (targetProfitPrice - executionPrice) * quantity 
+    : 0;
+
+  const handleSubmit = async (e) =&gt; {
+    e.preventDefault();
+    setErrorMsg(&#039;&#039;);
+    setSuccessMsg(&#039;&#039;);
+
+    if (quantity &lt;= 0) {
+      setErrorMsg(&#039;Quantity must be greater than zero.&#039;);
+      return;
+    }
+
+    if (tradeType === &#039;BUY&#039; &amp;&amp; estTotal &gt; balance) {
+      setErrorMsg(&#039;Insufficient virtual cash balance for this order.&#039;);
+      return;
+    }
+
+    if (tradeType === &#039;SELL&#039; &amp;&amp; quantity &gt; ownedQty) {
+      setErrorMsg(`Insufficient shares in holdings. You own ${ownedQty} shares.`);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await onExecuteTrade({
+        symbol: stock.symbol,
+        quantity,
+        type: tradeType,
+        price: executionPrice
+      });
+
+      if (response.success) {
+        setSuccessMsg(`Successfully executed ${tradeType} order for ${quantity} shares of ${stock.symbol}!`);
+        setQuantity(10);
+      } else {
+        setErrorMsg(response.error || &#039;Failed to execute trade.&#039;);
+      }
+    } catch (err) {
+      setErrorMsg(&#039;Server connection error. Failed to execute trade.&#039;);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    &lt;div className=&quot;glass-panel rounded-2xl p-5 flex flex-col justify-between h-[350px]&quot;&gt;
+      &lt;form onSubmit={handleSubmit} className=&quot;space-y-4 flex-1 flex flex-col justify-between&quot;&gt;
+        
+        {/* Trade Type Toggles (BUY/SELL) */}
+        &lt;div&gt;
+          &lt;div className=&quot;flex bg-slate-900/60 p-1 rounded-xl border border-slate-800&quot;&gt;
+            &lt;button
+              type=&quot;button&quot;
+              onClick={() =&gt; { setTradeType(&#039;BUY&#039;); setErrorMsg(&#039;&#039;); setSuccessMsg(&#039;&#039;); }}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-bold rounded-lg transition-all ${
+                tradeType === &#039;BUY&#039; 
+                  ? &#039;bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-sm&#039; 
+                  : &#039;text-slate-400 hover:text-slate-200&#039;
+              }`}
+            &gt;
+              &lt;ArrowUpRight className=&quot;h-3.5 w-3.5&quot; /&gt;
+              &lt;span&gt;BUY&lt;/span&gt;
+            &lt;/button&gt;
+            
+            &lt;button
+              type=&quot;button&quot;
+              onClick={() =&gt; { setTradeType(&#039;SELL&#039;); setErrorMsg(&#039;&#039;); setSuccessMsg(&#039;&#039;); }}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 text-xs font-bold rounded-lg transition-all ${
+                tradeType === &#039;SELL&#039; 
+                  ? &#039;bg-rose-500/20 text-rose-400 border border-rose-500/30 shadow-sm&#039; 
+                  : &#039;text-slate-400 hover:text-slate-200&#039;
+              }`}
+            &gt;
+              &lt;ArrowDownRight className=&quot;h-3.5 w-3.5&quot; /&gt;
+              &lt;span&gt;SELL&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Inputs */}
+        &lt;div className=&quot;grid grid-cols-2 gap-3 text-xs&quot;&gt;
+          &lt;div&gt;
+            &lt;label className=&quot;text-slate-400 font-semibold mb-1 block&quot;&gt;Order Type&lt;/label&gt;
+            &lt;select
+              value={orderType}
+              onChange={(e) =&gt; setOrderType(e.target.value)}
+              className=&quot;w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 font-medium outline-none focus:border-blue-500&quot;
+            &gt;
+              &lt;option value=&quot;MARKET&quot;&gt;MARKET PRICE&lt;/option&gt;
+              &lt;option value=&quot;LIMIT&quot;&gt;LIMIT PRICE&lt;/option&gt;
+            &lt;/select&gt;
+          &lt;/div&gt;
+
+          &lt;div&gt;
+            &lt;label className=&quot;text-slate-400 font-semibold mb-1 block&quot;&gt;Shares (Quantity)&lt;/label&gt;
+            &lt;input
+              type=&quot;number&quot;
+              min=&quot;1&quot;
+              value={quantity}
+              onChange={(e) =&gt; setQuantity(Math.max(1, parseInt(e.target.value) || 0))}
+              className=&quot;w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 font-bold outline-none focus:border-blue-500 text-right&quot;
+            /&gt;
+          &lt;/div&gt;
+
+          {orderType === &#039;LIMIT&#039; &amp;&amp; (
+            &lt;div className=&quot;col-span-2&quot;&gt;
+              &lt;label className=&quot;text-slate-400 font-semibold mb-1 block&quot;&gt;Limit Price (INR)&lt;/label&gt;
+              &lt;input
+                type=&quot;number&quot;
+                step=&quot;0.05&quot;
+                value={limitPrice}
+                onChange={(e) =&gt; setLimitPrice(Number(e.target.value))}
+                className=&quot;w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-slate-100 font-bold outline-none focus:border-blue-500 text-right&quot;
+              /&gt;
+            &lt;/div&gt;
+          )}
+
+          {/* Profit Points Option */}
+          &lt;div className=&quot;col-span-2&quot;&gt;
+            &lt;label className=&quot;text-slate-400 font-semibold mb-1.5 flex justify-between&quot;&gt;
+              &lt;span&gt;Take Profit Target&lt;/span&gt;
+              &lt;span className=&quot;text-emerald-400 font-bold&quot;&gt;{takeProfitPercent &gt; 0 ? `+${takeProfitPercent}%` : &#039;Disabled&#039;}&lt;/span&gt;
+            &lt;/label&gt;
+            &lt;div className=&quot;flex gap-2&quot;&gt;
+              {[0, 2, 5, 10, 15].map((pct) =&gt; (
+                &lt;button
+                  type=&quot;button&quot;
+                  key={pct}
+                  onClick={() =&gt; setTakeProfitPercent(pct)}
+                  className={`flex-1 py-1 rounded-[4px] text-[10px] font-bold border transition-all ${
+                    takeProfitPercent === pct
+                      ? &#039;bg-blue-500/20 text-blue-400 border-blue-500/30&#039;
+                      : &#039;bg-slate-950 text-slate-500 border-slate-800 hover:text-slate-300&#039;
+                  }`}
+                &gt;
+                  {pct === 0 ? &#039;Off&#039; : `${pct}%`}
+                &lt;/button&gt;
+              ))}
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Trade Information Footer */}
+        &lt;div className=&quot;space-y-1 border-t border-slate-800/80 pt-3 text-[10px] font-semibold text-slate-400&quot;&gt;
+          &lt;div className=&quot;flex justify-between&quot;&gt;
+            &lt;span className=&quot;flex items-center gap-1&quot;&gt;
+              &lt;Wallet className=&quot;h-3 w-3 text-slate-500&quot; /&gt;
+              &lt;span&gt;Available Cash / Holdings&lt;/span&gt;
+            &lt;/span&gt;
+            &lt;span className=&quot;text-slate-200&quot;&gt;
+              {tradeType === &#039;BUY&#039; 
+                ? `₹${balance.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })}` 
+                : `${ownedQty} Shares Owned`}
+            &lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;div className=&quot;flex justify-between&quot;&gt;
+            &lt;span&gt;Execution Price per Share&lt;/span&gt;
+            &lt;span className=&quot;text-slate-200&quot;&gt;₹{executionPrice.toFixed(2)}&lt;/span&gt;
+          &lt;/div&gt;
+
+          {takeProfitPercent &gt; 0 &amp;&amp; (
+            &lt;div className=&quot;flex justify-between text-emerald-400/80&quot;&gt;
+              &lt;span&gt;Expected Target Price / Profit&lt;/span&gt;
+              &lt;span&gt;₹{targetProfitPrice.toFixed(2)} (+₹{expectedProfit.toFixed(2)})&lt;/span&gt;
+            &lt;/div&gt;
+          )}
+
+          &lt;div className=&quot;flex justify-between text-xs border-t border-slate-800/40 pt-1.5 mt-1&quot;&gt;
+            &lt;span className=&quot;text-slate-300 font-bold&quot;&gt;Estimated Total&lt;/span&gt;
+            &lt;span className=&quot;text-white font-extrabold text-sm&quot;&gt;₹{estTotal.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })}&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Feedback Messages */}
+        {errorMsg &amp;&amp; (
+          &lt;div className=&quot;bg-rose-500/10 border border-rose-500/20 text-rose-400 p-2 rounded-lg text-[10px] text-center font-bold&quot;&gt;
+            {errorMsg}
+          &lt;/div&gt;
+        )}
+        {successMsg &amp;&amp; (
+          &lt;div className=&quot;bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 p-2 rounded-lg text-[10px] text-center font-bold&quot;&gt;
+            {successMsg}
+          &lt;/div&gt;
+        )}
+
+        {/* Trade Execution Button */}
+        &lt;button
+          type=&quot;submit&quot;
+          disabled={isSubmitting}
+          className={`w-full py-2.5 rounded-xl font-extrabold text-xs tracking-wider transition-all ${
+            tradeType === &#039;BUY&#039;
+              ? &#039;bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-slate-950 shadow-lg shadow-emerald-500/25&#039;
+              : &#039;bg-rose-500 hover:bg-rose-600 active:scale-95 text-slate-950 shadow-lg shadow-rose-500/25&#039;
+          } disabled:opacity-50 disabled:cursor-not-allowed`}
+        &gt;
+          {isSubmitting ? &#039;PLACING ORDER...&#039; : `PLACE ${tradeType} ORDER`}
+        &lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-8" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React from &#039;react&#039;;
+import { Briefcase, RotateCcw, TrendingUp, TrendingDown, History, ShoppingBag } from &#039;lucide-react&#039;;
+
+export default function Portfolio({ portfolio, stocks, transactions, onReset, onSelectStock }) {
+  const holdings = portfolio?.holdings || [];
+  const balance = portfolio?.balance || 1000000;
+
+  // Calculate current value of holdings based on live stock prices
+  const totalCost = holdings.reduce((sum, h) =&gt; sum + (h.quantity * h.avgPrice), 0);
+  const currentValue = holdings.reduce((sum, h) =&gt; {
+    const livePrice = stocks[h.symbol]?.price || h.avgPrice;
+    return sum + (h.quantity * livePrice);
+  }, 0);
+
+  const totalPnL = currentValue - totalCost;
+  const pnlPercent = totalCost &gt; 0 ? (totalPnL / totalCost) * 100 : 0;
+  const netWorth = balance + currentValue;
+  const totalGainLoss = netWorth - 1000000; // Relative to starting 10 Lakhs
+  const overallReturnPercent = (totalGainLoss / 1000000) * 100;
+
+  return (
+    &lt;div className=&quot;space-y-6&quot;&gt;
+      {/* Portfolio Summary Widgets */}
+      &lt;div className=&quot;grid grid-cols-1 sm:grid-cols-3 gap-4&quot;&gt;
+        {/* Net Worth */}
+        &lt;div className=&quot;glass-panel rounded-2xl p-4 flex flex-col justify-between&quot;&gt;
+          &lt;div className=&quot;flex items-center justify-between text-slate-400&quot;&gt;
+            &lt;span className=&quot;text-xs font-semibold uppercase tracking-wider&quot;&gt;Net Worth (Equity + Cash)&lt;/span&gt;
+            &lt;Briefcase className=&quot;h-4 w-4 text-blue-400&quot; /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;mt-2&quot;&gt;
+            &lt;span className=&quot;text-xl font-black text-slate-50&quot;&gt;₹{netWorth.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })}&lt;/span&gt;
+            &lt;span className={`text-xs font-semibold block mt-1 ${totalGainLoss &gt;= 0 ? &#039;text-emerald-400&#039; : &#039;text-rose-400&#039;}`}&gt;
+              {totalGainLoss &gt;= 0 ? &#039;+&#039; : &#039;&#039;}{totalGainLoss.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })} ({overallReturnPercent.toFixed(2)}%)
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Free Cash Balance */}
+        &lt;div className=&quot;glass-panel rounded-2xl p-4 flex flex-col justify-between&quot;&gt;
+          &lt;div className=&quot;flex items-center justify-between text-slate-400&quot;&gt;
+            &lt;span className=&quot;text-xs font-semibold uppercase tracking-wider&quot;&gt;Virtual Cash Balance&lt;/span&gt;
+            &lt;RotateCcw
+              className=&quot;h-4 w-4 text-slate-400 hover:text-white cursor-pointer transition-colors&quot; 
+              onClick={() =&gt; {
+                if (window.confirm(&#039;Reset virtual trading account to starting balance of ₹10,00,000 and clear order history?&#039;)) {
+                  onReset();
+                }
+              }}
+              title=&quot;Reset portfolio&quot;
+            /&gt;
+          &lt;/div&gt;
+          &lt;div className=&quot;mt-2&quot;&gt;
+            &lt;span className=&quot;text-xl font-black text-slate-50&quot;&gt;₹{balance.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })}&lt;/span&gt;
+            &lt;span className=&quot;text-xs text-slate-500 block mt-1&quot;&gt;Available to trade&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Active Holdings P&amp;L */}
+        &lt;div className=&quot;glass-panel rounded-2xl p-4 flex flex-col justify-between&quot;&gt;
+          &lt;div className=&quot;flex items-center justify-between text-slate-400&quot;&gt;
+            &lt;span className=&quot;text-xs font-semibold uppercase tracking-wider&quot;&gt;Unrealized P&amp;L&lt;/span&gt;
+            {totalPnL &gt;= 0 ? (
+              &lt;TrendingUp className=&quot;h-4 w-4 text-emerald-400&quot; /&gt;
+            ) : (
+              &lt;TrendingDown className=&quot;h-4 w-4 text-rose-400&quot; /&gt;
+            )}
+          &lt;/div&gt;
+          &lt;div className=&quot;mt-2&quot;&gt;
+            &lt;span className={`text-xl font-black ${totalPnL &gt;= 0 ? &#039;text-emerald-400 glow-green&#039; : &#039;text-rose-400 glow-red&#039;}`}&gt;
+              ₹{totalPnL.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })}
+            &lt;/span&gt;
+            &lt;span className={`text-xs font-semibold block mt-1 ${totalPnL &gt;= 0 ? &#039;text-emerald-400&#039; : &#039;text-rose-400&#039;}`}&gt;
+              {totalPnL &gt;= 0 ? &#039;+&#039; : &#039;&#039;}{pnlPercent.toFixed(2)}%
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* Holdings Table */}
+      &lt;div className=&quot;glass-panel rounded-2xl p-5&quot;&gt;
+        &lt;h3 className=&quot;text-md font-bold text-white mb-4 flex items-center gap-2&quot;&gt;
+          &lt;ShoppingBag className=&quot;h-4 w-4 text-emerald-400&quot; /&gt;
+          &lt;span&gt;Active Positions ({holdings.length})&lt;/span&gt;
+        &lt;/h3&gt;
+        
+        {holdings.length === 0 ? (
+          &lt;div className=&quot;text-center py-8 text-slate-500 text-sm&quot;&gt;
+            You do not own any stocks yet. Place a BUY order to start paper trading.
+          &lt;/div&gt;
+        ) : (
+          &lt;div className=&quot;overflow-x-auto&quot;&gt;
+            &lt;table className=&quot;w-full text-left text-xs border-collapse&quot;&gt;
+              &lt;thead&gt;
+                &lt;tr className=&quot;text-slate-500 border-b border-slate-800 pb-2&quot;&gt;
+                  &lt;th className=&quot;pb-2 font-semibold uppercase&quot;&gt;Stock&lt;/th&gt;
+                  &lt;th className=&quot;pb-2 font-semibold uppercase text-right&quot;&gt;Qty&lt;/th&gt;
+                  &lt;th className=&quot;pb-2 font-semibold uppercase text-right&quot;&gt;Avg Price&lt;/th&gt;
+                  &lt;th className=&quot;pb-2 font-semibold uppercase text-right&quot;&gt;Live Price&lt;/th&gt;
+                  &lt;th className=&quot;pb-2 font-semibold uppercase text-right&quot;&gt;Current Value&lt;/th&gt;
+                  &lt;th className=&quot;pb-2 font-semibold uppercase text-right&quot;&gt;Gain / Loss&lt;/th&gt;
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody className=&quot;divide-y divide-slate-800/50&quot;&gt;
+                {holdings.map((h) =&gt; {
+                  const liveStock = stocks[h.symbol];
+                  const livePrice = liveStock?.price || h.avgPrice;
+                  const itemCost = h.quantity * h.avgPrice;
+                  const itemValue = h.quantity * livePrice;
+                  const itemPnL = itemValue - itemCost;
+                  const itemReturn = (itemPnL / itemCost) * 100;
+                  
+                  return (
+                    &lt;tr key={h.symbol} className=&quot;hover:bg-slate-800/20 cursor-pointer&quot; onClick={() =&gt; onSelectStock(h.symbol)}&gt;
+                      &lt;td className=&quot;py-3 pr-2&quot;&gt;
+                        &lt;div className=&quot;font-bold text-white&quot;&gt;{h.symbol}&lt;/div&gt;
+                        &lt;div className=&quot;text-[10px] text-slate-500 max-w-[120px] truncate&quot;&gt;{h.name}&lt;/div&gt;
+                      &lt;/td&gt;
+                      &lt;td className=&quot;py-3 text-right font-medium text-slate-200&quot;&gt;{h.quantity}&lt;/td&gt;
+                      &lt;td className=&quot;py-3 text-right text-slate-300&quot;&gt;₹{h.avgPrice.toFixed(2)}&lt;/td&gt;
+                      &lt;td className=&quot;py-3 text-right font-bold text-white&quot;&gt;₹{livePrice.toFixed(2)}&lt;/td&gt;
+                      &lt;td className=&quot;py-3 text-right font-semibold text-slate-100&quot;&gt;₹{itemValue.toFixed(2)}&lt;/td&gt;
+                      &lt;td className={`py-3 text-right font-bold ${itemPnL &gt;= 0 ? &#039;text-emerald-400&#039; : &#039;text-rose-400&#039;}`}&gt;
+                        &lt;div&gt;₹{itemPnL.toFixed(2)}&lt;/div&gt;
+                        &lt;div className=&quot;text-[10px] font-normal&quot;&gt;{itemPnL &gt;= 0 ? &#039;+&#039; : &#039;&#039;}{itemReturn.toFixed(2)}%&lt;/div&gt;
+                      &lt;/td&gt;
+                    &lt;/tr&gt;
+                  );
+                })}
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+
+      {/* Transaction History Logs */}
+      &lt;div className=&quot;glass-panel rounded-2xl p-5&quot;&gt;
+        &lt;h3 className=&quot;text-md font-bold text-white mb-4 flex items-center gap-2&quot;&gt;
+          &lt;History className=&quot;h-4 w-4 text-purple-400&quot; /&gt;
+          &lt;span&gt;Recent Activity&lt;/span&gt;
+        &lt;/h3&gt;
+        
+        {transactions.length === 0 ? (
+          &lt;div className=&quot;text-center py-4 text-slate-500 text-sm&quot;&gt;
+            No transactions executed yet.
+          &lt;/div&gt;
+        ) : (
+          &lt;div className=&quot;max-h-48 overflow-y-auto space-y-2 pr-1&quot;&gt;
+            {transactions.map((tx, idx) =&gt; (
+              &lt;div key={idx} className=&quot;flex justify-between items-center text-xs bg-slate-900/40 p-2.5 rounded-xl border border-slate-800/40&quot;&gt;
+                &lt;div&gt;
+                  &lt;div className=&quot;flex items-center gap-1.5&quot;&gt;
+                    &lt;span className={`px-1.5 py-0.5 rounded-[4px] font-bold text-[9px] ${tx.type === &#039;BUY&#039; ? &#039;bg-emerald-500/10 text-emerald-400&#039; : &#039;bg-rose-500/10 text-rose-400&#039;}`}&gt;
+                      {tx.type}
+                    &lt;/span&gt;
+                    &lt;span className=&quot;font-bold text-white&quot;&gt;{tx.symbol}&lt;/span&gt;
+                  &lt;/div&gt;
+                  &lt;div className=&quot;text-[10px] text-slate-500 mt-0.5&quot;&gt;
+                    {new Date(tx.timestamp).toLocaleString([], { hour: &#039;2-digit&#039;, minute: &#039;2-digit&#039;, second: &#039;2-digit&#039; })}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+                
+                &lt;div className=&quot;text-right&quot;&gt;
+                  &lt;div className=&quot;font-bold text-slate-200&quot;&gt;{tx.quantity} Shares @ ₹{tx.price.toFixed(2)}&lt;/div&gt;
+                  &lt;div className=&quot;text-[10px] text-slate-400 font-semibold mt-0.5&quot;&gt;Total: ₹{(tx.quantity * tx.price).toFixed(2)}&lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            ))}
+          &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-9" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React, { useState } from &#039;react&#039;;
+import { Star, Plus, X, Search, Activity } from &#039;lucide-react&#039;;
+
+export default function Watchlist({ watchlist, stocks, onUpdateWatchlist, selectedSymbol, onSelectStock }) {
+  const [searchTerm, setSearchTerm] = useState(&#039;&#039;);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  // Filter stocks that are NOT in the watchlist currently
+  const availableToAdd = Object.keys(stocks).filter(
+    (symbol) =&gt; !watchlist.includes(symbol) &amp;&amp; symbol.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleAddToWatchlist = (symbol) =&gt; {
+    const newWatchlist = [...watchlist, symbol];
+    onUpdateWatchlist(newWatchlist);
+    setIsDropdownOpen(false);
+    setSearchTerm(&#039;&#039;);
+  };
+
+  const handleRemoveFromWatchlist = (e, symbol) =&gt; {
+    e.stopPropagation(); // Avoid selecting stock
+    const newWatchlist = watchlist.filter((s) =&gt; s !== symbol);
+    onUpdateWatchlist(newWatchlist);
+  };
+
+  return (
+    &lt;div className=&quot;glass-panel rounded-2xl p-5 flex flex-col h-[350px]&quot;&gt;
+      &lt;div className=&quot;flex items-center justify-between border-b border-slate-800 pb-3 mb-3&quot;&gt;
+        &lt;h3 className=&quot;text-sm font-bold text-white flex items-center gap-2&quot;&gt;
+          &lt;Star className=&quot;h-4 w-4 text-amber-400 fill-amber-400/20&quot; /&gt;
+          &lt;span&gt;My Watchlist&lt;/span&gt;
+        &lt;/h3&gt;
+        
+        {/* Watchlist Search/Add Widget */}
+        &lt;div className=&quot;relative&quot;&gt;
+          &lt;button
+            onClick={() =&gt; setIsDropdownOpen(!isDropdownOpen)}
+            className=&quot;flex items-center gap-1.5 text-[10px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-1 rounded-md hover:bg-blue-500/25 transition-all&quot;
+          &gt;
+            &lt;Plus className=&quot;h-3 w-3&quot; /&gt;
+            &lt;span&gt;Add Stock&lt;/span&gt;
+          &lt;/button&gt;
+
+          {isDropdownOpen &amp;&amp; (
+            &lt;div className=&quot;absolute right-0 mt-2 w-48 bg-slate-900 border border-slate-800 rounded-xl shadow-2xl z-50 p-2 text-xs&quot;&gt;
+              &lt;div className=&quot;flex items-center gap-1.5 bg-slate-950 p-1.5 rounded-lg mb-2&quot;&gt;
+                &lt;Search className=&quot;h-3.5 w-3.5 text-slate-500&quot; /&gt;
+                &lt;input
+                  type=&quot;text&quot;
+                  placeholder=&quot;Search stock...&quot;
+                  value={searchTerm}
+                  onChange={(e) =&gt; setSearchTerm(e.target.value)}
+                  className=&quot;bg-transparent border-none outline-none text-slate-100 text-xs w-full&quot;
+                  autoFocus
+                /&gt;
+              &lt;/div&gt;
+              
+              &lt;div className=&quot;max-h-36 overflow-y-auto space-y-1&quot;&gt;
+                {availableToAdd.length === 0 ? (
+                  &lt;p className=&quot;text-center text-slate-500 py-2&quot;&gt;No stocks found&lt;/p&gt;
+                ) : (
+                  availableToAdd.map((symbol) =&gt; (
+                    &lt;button
+                      key={symbol}
+                      onClick={() =&gt; handleAddToWatchlist(symbol)}
+                      className=&quot;w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-slate-800 text-slate-200 hover:text-white font-semibold transition-colors&quot;
+                    &gt;
+                      {symbol}
+                    &lt;/button&gt;
+                  ))
+                )}
+              &lt;/div&gt;
+            &lt;/div&gt;
+          )}
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* Watchlist Tickers */}
+      &lt;div className=&quot;flex-1 overflow-y-auto space-y-2 pr-1&quot;&gt;
+        {watchlist.length === 0 ? (
+          &lt;div className=&quot;text-center py-12 text-slate-500 text-xs&quot;&gt;
+            No stocks watchlisted yet. Click &quot;Add Stock&quot; to add symbols.
+          &lt;/div&gt;
+        ) : (
+          watchlist.map((symbol) =&gt; {
+            const stock = stocks[symbol];
+            if (!stock) return null;
+            
+            const isSelected = selectedSymbol === symbol;
+            const isUp = stock.changePercent &gt;= 0;
+
+            return (
+              &lt;div
+                key={symbol}
+                onClick={() =&gt; onSelectStock(symbol)}
+                className={`flex justify-between items-center p-3 rounded-xl border transition-all cursor-pointer ${
+                  isSelected 
+                    ? &#039;bg-blue-500/10 border-blue-500/30&#039; 
+                    : &#039;bg-slate-900/40 border-slate-800/40 hover:bg-slate-800/20 hover:border-slate-800/80&#039;
+                }`}
+              &gt;
+                &lt;div&gt;
+                  &lt;div className=&quot;flex items-center gap-1.5&quot;&gt;
+                    &lt;span className=&quot;font-bold text-white text-xs&quot;&gt;{stock.symbol}&lt;/span&gt;
+                    {symbol === &#039;SENSEX&#039; &amp;&amp; (
+                      &lt;span className=&quot;px-1 text-[8px] font-extrabold uppercase bg-red-500/20 text-red-400 border border-red-500/30 rounded&quot;&gt;
+                        Index
+                      &lt;/span&gt;
+                    )}
+                  &lt;/div&gt;
+                  &lt;div className=&quot;text-[9px] text-slate-500 max-w-[100px] truncate&quot;&gt;{stock.name}&lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div className=&quot;flex items-center gap-2&quot;&gt;
+                  &lt;div className=&quot;text-right&quot;&gt;
+                    &lt;div className=&quot;font-bold text-white text-xs&quot;&gt;₹{stock.price.toFixed(2)}&lt;/div&gt;
+                    &lt;div className={`text-[10px] font-semibold mt-0.5 ${isUp ? &#039;text-emerald-400&#039; : &#039;text-rose-400&#039;}`}&gt;
+                      {isUp ? &#039;+&#039; : &#039;&#039;}{stock.changePercent.toFixed(2)}%
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  
+                  {symbol !== &#039;SENSEX&#039; &amp;&amp; (
+                    &lt;button
+                      onClick={(e) =&gt; handleRemoveFromWatchlist(e, symbol)}
+                      className=&quot;text-slate-500 hover:text-slate-200 p-1 transition-colors&quot;
+                      title=&quot;Remove from watchlist&quot;
+                    &gt;
+                      &lt;X className=&quot;h-3 w-3&quot; /&gt;
+                    &lt;/button&gt;
+                  )}
+                &lt;/div&gt;
+              &lt;/div&gt;
+            );
+          })
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-10" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React from &#039;react&#039;;
+import { Newspaper, ArrowUpRight, ArrowDownRight } from &#039;lucide-react&#039;;
+
+export default function NewsFeed({ news, onSelectStock }) {
+  return (
+    &lt;div className=&quot;glass-panel rounded-2xl p-5 flex flex-col h-[350px]&quot;&gt;
+      &lt;div className=&quot;flex items-center gap-2 border-b border-slate-800 pb-3 mb-3&quot;&gt;
+        &lt;Newspaper className=&quot;h-4 w-4 text-blue-400&quot; /&gt;
+        &lt;h3 className=&quot;text-sm font-bold text-white&quot;&gt;Live Company Updates &amp; Sentiment&lt;/h3&gt;
+      &lt;/div&gt;
+
+      &lt;div className=&quot;flex-1 overflow-y-auto space-y-3 pr-1&quot;&gt;
+        {news.length === 0 ? (
+          &lt;div className=&quot;text-center py-16 text-slate-500 text-xs&quot;&gt;
+            Waiting for live news updates... (updates automatically every 18s)
+          &lt;/div&gt;
+        ) : (
+          news.map((item) =&gt; {
+            const isBullish = item.sentiment === &#039;bullish&#039;;
+            
+            return (
+              &lt;div 
+                key={item.id} 
+                className={`p-3 rounded-xl border text-xs space-y-2 transition-all ${
+                  isBullish 
+                    ? &#039;bg-emerald-500/5 border-emerald-500/10 hover:border-emerald-500/20&#039; 
+                    : &#039;bg-rose-500/5 border-rose-500/10 hover:border-rose-500/20&#039;
+                }`}
+              &gt;
+                &lt;div className=&quot;flex justify-between items-center&quot;&gt;
+                  &lt;button
+                    onClick={() =&gt; onSelectStock(item.symbol)}
+                    className=&quot;px-1.5 py-0.5 rounded-[4px] font-bold text-[9px] bg-slate-800 text-slate-300 hover:text-white border border-slate-700/50 hover:bg-slate-700 transition-colors&quot;
+                  &gt;
+                    {item.symbol}
+                  &lt;/button&gt;
+                  
+                  &lt;span className={`flex items-center gap-0.5 text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded-[4px] border ${
+                    isBullish 
+                      ? &#039;bg-emerald-500/10 text-emerald-400 border-emerald-500/20&#039; 
+                      : &#039;bg-rose-500/10 text-rose-400 border-rose-500/20&#039;
+                  }`}&gt;
+                    {isBullish ? &lt;ArrowUpRight className=&quot;h-2.5 w-2.5&quot; /&gt; : &lt;ArrowDownRight className=&quot;h-2.5 w-2.5&quot; /&gt;}
+                    &lt;span&gt;{item.sentiment}&lt;/span&gt;
+                  &lt;/span&gt;
+                &lt;/div&gt;
+
+                &lt;p className=&quot;text-slate-200 font-medium leading-relaxed&quot;&gt;{item.text}&lt;/p&gt;
+                
+                &lt;div className=&quot;text-[9px] text-slate-500 font-semibold text-right&quot;&gt;
+                  {new Date(item.timestamp).toLocaleTimeString([], { hour: &#039;2-digit&#039;, minute: &#039;2-digit&#039;, second: &#039;2-digit&#039; })}
+                &lt;/div&gt;
+              &lt;/div&gt;
+            );
+          })
+        )}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-11" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React, { useState } from &#039;react&#039;;
+import { Activity, Mail, Lock, User, ArrowRight } from &#039;lucide-react&#039;;
+
+export default function AuthModal({ onAuthSuccess }) {
+  const [isLogin, setIsLogin] = useState(true);
+  const [name, setName] = useState(&#039;&#039;);
+  const [email, setEmail] = useState(&#039;&#039;);
+  const [password, setPassword] = useState(&#039;&#039;);
+  const [errorMsg, setErrorMsg] = useState(&#039;&#039;);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) =&gt; {
+    e.preventDefault();
+    setErrorMsg(&#039;&#039;);
+
+    if (!email || !password || (!isLogin &amp;&amp; !name)) {
+      setErrorMsg(&#039;All fields are required.&#039;);
+      return;
+    }
+
+    setIsSubmitting(true);
+    const endpoint = isLogin ? &#039;/api/auth/login&#039; : &#039;/api/auth/register&#039;;
+    const payload = isLogin ? { email, password } : { name, email, password };
+
+    try {
+      const response = await fetch(`http://localhost:5000${endpoint}`, {
+        method: &#039;POST&#039;,
+        headers: { &#039;Content-Type&#039;: &#039;application/json&#039; },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+
+      if (response.ok &amp;&amp; result.token) {
+        localStorage.setItem(&#039;sensex_token&#039;, result.token);
+        localStorage.setItem(&#039;sensex_user&#039;, JSON.stringify(result.user));
+        onAuthSuccess(result.token, result.user);
+      } else {
+        setErrorMsg(result.error || &#039;Authentication failed. Please check inputs.&#039;);
+      }
+    } catch (err) {
+      setErrorMsg(&#039;Server connection failed. Is the backend running?&#039;);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    &lt;div className=&quot;fixed inset-0 bg-[#04060b]/90 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fade-in&quot;&gt;
+      &lt;div className=&quot;glass-panel rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-800/80 max-h-[90vh] overflow-y-auto&quot;&gt;
+        &lt;div className=&quot;text-center mb-6&quot;&gt;
+          &lt;div className=&quot;h-12 w-12 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25 mx-auto mb-3&quot;&gt;
+            &lt;Activity className=&quot;h-6 w-6 text-white animate-pulse&quot; /&gt;
+          &lt;/div&gt;
+          &lt;h2 className=&quot;text-xl font-extrabold text-white tracking-tight&quot;&gt;
+            {isLogin ? &#039;Welcome Back Trader&#039; : &#039;Create Paper Trading Account&#039;}
+          &lt;/h2&gt;
+          &lt;p className=&quot;text-xs text-slate-500 font-semibold mt-1&quot;&gt;
+            {isLogin ? &#039;Access BSE SENSEX live dashboard &amp; virtual portfolio&#039; : &#039;Start paper trading today with ₹10,00,000 in virtual cash&#039;}
+          &lt;/p&gt;
+        &lt;/div&gt;
+
+        {errorMsg &amp;&amp; (
+          &lt;div className=&quot;bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs p-3 rounded-xl mb-4 font-bold text-center&quot;&gt;
+            {errorMsg}
+          &lt;/div&gt;
+        )}
+
+        &lt;form onSubmit={handleSubmit} className=&quot;space-y-4&quot;&gt;
+          {!isLogin &amp;&amp; (
+            &lt;div className=&quot;space-y-1&quot;&gt;
+              &lt;label className=&quot;text-xs font-semibold text-slate-400 block&quot;&gt;Full Name&lt;/label&gt;
+              &lt;div className=&quot;relative&quot;&gt;
+                &lt;User className=&quot;absolute left-3 top-2.5 h-4 w-4 text-slate-500&quot; /&gt;
+                &lt;input
+                  type=&quot;text&quot;
+                  placeholder=&quot;e.g. John Doe&quot;
+                  value={name}
+                  onChange={(e) =&gt; setName(e.target.value)}
+                  className=&quot;w-full bg-slate-950 border border-slate-800 rounded-xl py-2 pl-10 pr-4 text-xs text-slate-200 outline-none focus:border-blue-500 transition-colors font-semibold&quot;
+                /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          )}
+
+          &lt;div className=&quot;space-y-1&quot;&gt;
+            &lt;label className=&quot;text-xs font-semibold text-slate-400 block&quot;&gt;Email Address&lt;/label&gt;
+            &lt;div className=&quot;relative&quot;&gt;
+              &lt;Mail className=&quot;absolute left-3 top-2.5 h-4 w-4 text-slate-500&quot; /&gt;
+              &lt;input
+                type=&quot;email&quot;
+                placeholder=&quot;you@example.com&quot;
+                value={email}
+                onChange={(e) =&gt; setEmail(e.target.value)}
+                className=&quot;w-full bg-slate-950 border border-slate-800 rounded-xl py-2 pl-10 pr-4 text-xs text-slate-200 outline-none focus:border-blue-500 transition-colors font-semibold&quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div className=&quot;space-y-1&quot;&gt;
+            &lt;label className=&quot;text-xs font-semibold text-slate-400 block&quot;&gt;Password&lt;/label&gt;
+            &lt;div className=&quot;relative&quot;&gt;
+              &lt;Lock className=&quot;absolute left-3 top-2.5 h-4 w-4 text-slate-500&quot; /&gt;
+              &lt;input
+                type=&quot;password&quot;
+                placeholder=&quot;••••••••&quot;
+                value={password}
+                onChange={(e) =&gt; setPassword(e.target.value)}
+                className=&quot;w-full bg-slate-950 border border-slate-800 rounded-xl py-2 pl-10 pr-4 text-xs text-slate-200 outline-none focus:border-blue-500 transition-colors font-semibold&quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;button
+            type=&quot;submit&quot;
+            disabled={isSubmitting}
+            className=&quot;w-full bg-blue-500 hover:bg-blue-600 active:scale-[0.98] py-3 rounded-xl font-extrabold text-xs text-slate-950 flex items-center justify-center gap-1.5 transition-all shadow-lg shadow-blue-500/20 disabled:opacity-50 mt-6&quot;
+          &gt;
+            &lt;span&gt;{isSubmitting ? &#039;VERIFYING...&#039; : isLogin ? &#039;SIGN IN&#039; : &#039;REGISTER &amp; OPEN ACCOUNT&#039;}&lt;/span&gt;
+            &lt;ArrowRight className=&quot;h-4 w-4&quot; /&gt;
+          &lt;/button&gt;
+        &lt;/form&gt;
+
+        &lt;div className=&quot;border-t border-slate-800/80 pt-4 mt-6 text-center text-xs&quot;&gt;
+          &lt;span className=&quot;text-slate-500 font-semibold&quot;&gt;
+            {isLogin ? &quot;Don&#039;t have an account?&quot; : &#039;Already registered?&#039;}
+          &lt;/span&gt;{&#039; &#039;}
+          &lt;button
+            onClick={() =&gt; {
+              setIsLogin(!isLogin);
+              setErrorMsg(&#039;&#039;);
+              setName(&#039;&#039;);
+              setEmail(&#039;&#039;);
+              setPassword(&#039;&#039;);
+            }}
+            className=&quot;text-blue-400 font-extrabold hover:text-blue-300 transition-colors&quot;
+          &gt;
+            {isLogin ? &#039;Create Account&#039; : &#039;Sign In Now&#039;}
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-12" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React, { useState } from &#039;react&#039;;
+import { User, Mail, Shield, ShieldCheck, CheckCircle2, TrendingUp, TrendingDown, Save, PieChart } from &#039;lucide-react&#039;;
+
+export default function ProfileSection({ user, portfolio, transactions, onUpdateProfile }) {
+  const [name, setName] = useState(user?.name || &#039;&#039;);
+  const [avatar, setAvatar] = useState(user?.avatar || &#039;blue&#039;);
+  const [tradingLevel, setTradingLevel] = useState(user?.tradingLevel || &#039;Novice&#039;);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+
+  const holdings = portfolio?.holdings || [];
+  const balance = portfolio?.balance || 1000000;
+  
+  // Stats calculations
+  const totalEquities = holdings.reduce((sum, h) =&gt; sum + (h.quantity * h.avgPrice), 0);
+  const totalWorth = balance + totalEquities;
+  const allocationEquities = totalWorth &gt; 0 ? (totalEquities / totalWorth) * 100 : 0;
+  const allocationCash = 100 - allocationEquities;
+
+  const totalTrades = transactions.length;
+  const buyTrades = transactions.filter(t =&gt; t.type === &#039;BUY&#039;).length;
+  const sellTrades = totalTrades - buyTrades;
+
+  const handleSave = async (e) =&gt; {
+    e.preventDefault();
+    setIsSaving(true);
+    setSaveSuccess(false);
+
+    try {
+      const response = await fetch(&#039;http://localhost:5000/api/auth/profile/update&#039;, {
+        method: &#039;POST&#039;,
+        headers: {
+          &#039;Content-Type&#039;: &#039;application/json&#039;,
+          &#039;Authorization&#039;: `Bearer ${localStorage.getItem(&#039;sensex_token&#039;)}`
+        },
+        body: JSON.stringify({ name, avatar, tradingLevel })
+      });
+      const result = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem(&#039;sensex_user&#039;, JSON.stringify(result));
+        onUpdateProfile(result);
+        setSaveSuccess(true);
+        setTimeout(() =&gt; setSaveSuccess(false), 3000);
+      }
+    } catch (err) {
+      console.error(&#039;Failed to update profile settings:&#039;, err);
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const getAvatarClass = (color) =&gt; {
+    switch (color) {
+      case &#039;emerald&#039;: return &#039;bg-emerald-500/20 text-emerald-400 border-emerald-500/30&#039;;
+      case &#039;purple&#039;: return &#039;bg-purple-500/20 text-purple-400 border-purple-500/30&#039;;
+      case &#039;orange&#039;: return &#039;bg-orange-500/20 text-orange-400 border-orange-500/30&#039;;
+      default: return &#039;bg-blue-500/20 text-blue-400 border-blue-500/30&#039;;
+    }
+  };
+
+  return (
+    &lt;div className=&quot;grid grid-cols-1 md:grid-cols-12 gap-6 animate-fade-in&quot;&gt;
+      
+      {/* Profile Card &amp; Info Edit */}
+      &lt;div className=&quot;md:col-span-5 space-y-6&quot;&gt;
+        &lt;div className=&quot;glass-panel rounded-2xl p-6 flex flex-col items-center text-center&quot;&gt;
+          
+          {/* Avatar frame */}
+          &lt;div className={`h-24 w-24 rounded-full border-2 flex items-center justify-center shadow-inner ${getAvatarClass(avatar)}`}&gt;
+            &lt;User className=&quot;h-12 w-12&quot; /&gt;
+          &lt;/div&gt;
+          
+          &lt;h2 className=&quot;text-lg font-black text-white mt-4&quot;&gt;{user?.name}&lt;/h2&gt;
+          &lt;p className=&quot;text-xs text-slate-500 font-semibold&quot;&gt;{user?.email}&lt;/p&gt;
+          
+          &lt;div className=&quot;mt-3 flex items-center gap-1.5 bg-slate-900/60 border border-slate-800 px-3 py-1 rounded-full text-[10px] font-bold text-blue-400&quot;&gt;
+            &lt;Shield className=&quot;h-3 w-3&quot; /&gt;
+            &lt;span&gt;Trading Level: {user?.tradingLevel}&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;form onSubmit={handleSave} className=&quot;w-full mt-6 space-y-4 text-left text-xs border-t border-slate-800/80 pt-5&quot;&gt;
+            
+            &lt;div className=&quot;space-y-1&quot;&gt;
+              &lt;label className=&quot;text-slate-400 font-bold&quot;&gt;Display Name&lt;/label&gt;
+              &lt;input
+                type=&quot;text&quot;
+                value={name}
+                onChange={(e) =&gt; setName(e.target.value)}
+                className=&quot;w-full bg-slate-950 border border-slate-800 rounded-xl p-2 text-slate-200 outline-none focus:border-blue-500 font-semibold&quot;
+              /&gt;
+            &lt;/div&gt;
+
+            &lt;div className=&quot;space-y-1&quot;&gt;
+              &lt;label className=&quot;text-slate-400 font-bold block mb-1.5&quot;&gt;Avatar Color Theme&lt;/label&gt;
+              &lt;div className=&quot;flex gap-3&quot;&gt;
+                {[&#039;blue&#039;, &#039;emerald&#039;, &#039;purple&#039;, &#039;orange&#039;].map((c) =&gt; (
+                  &lt;button
+                    type=&quot;button&quot;
+                    key={c}
+                    onClick={() =&gt; setAvatar(c)}
+                    className={`h-7 w-7 rounded-full border transition-all ${
+                      avatar === c ? &#039;scale-110 border-white shadow-md&#039; : &#039;border-transparent&#039;
+                    } ${
+                      c === &#039;blue&#039; ? &#039;bg-blue-500&#039; : c === &#039;emerald&#039; ? &#039;bg-emerald-500&#039; : c === &#039;purple&#039; ? &#039;bg-purple-500&#039; : &#039;bg-orange-500&#039;
+                    }`}
+                  /&gt;
+                ))}
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div className=&quot;space-y-1&quot;&gt;
+              &lt;label className=&quot;text-slate-400 font-bold&quot;&gt;Trading Level&lt;/label&gt;
+              &lt;select
+                value={tradingLevel}
+                onChange={(e) =&gt; setTradingLevel(e.target.value)}
+                className=&quot;w-full bg-slate-950 border border-slate-800 rounded-xl p-2 text-slate-200 outline-none focus:border-blue-500 font-semibold&quot;
+              &gt;
+                &lt;option value=&quot;Novice&quot;&gt;Novice / Beginner&lt;/option&gt;
+                &lt;option value=&quot;Intermediate&quot;&gt;Intermediate Trader&lt;/option&gt;
+                &lt;option value=&quot;Expert&quot;&gt;Expert / Analyst&lt;/option&gt;
+              &lt;/select&gt;
+            &lt;/div&gt;
+
+            {saveSuccess &amp;&amp; (
+              &lt;div className=&quot;bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] py-1.5 rounded-lg flex items-center justify-center gap-1 font-bold&quot;&gt;
+                &lt;CheckCircle2 className=&quot;h-3.5 w-3.5&quot; /&gt;
+                &lt;span&gt;Profile updated successfully!&lt;/span&gt;
+              &lt;/div&gt;
+            )}
+
+            &lt;button
+              type=&quot;submit&quot;
+              disabled={isSaving}
+              className=&quot;w-full bg-blue-500 hover:bg-blue-600 active:scale-[0.97] py-2 rounded-xl text-slate-950 font-extrabold flex items-center justify-center gap-1.5 transition-all shadow-md shadow-blue-500/10&quot;
+            &gt;
+              &lt;Save className=&quot;h-4 w-4&quot; /&gt;
+              &lt;span&gt;{isSaving ? &#039;SAVING CHANGES...&#039; : &#039;SAVE SETTINGS&#039;}&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      {/* Profile statistics / allocation charts */}
+      &lt;div className=&quot;md:col-span-7 space-y-6&quot;&gt;
+        
+        {/* Trading Statistics */}
+        &lt;div className=&quot;glass-panel rounded-2xl p-6&quot;&gt;
+          &lt;h3 className=&quot;text-sm font-bold text-white mb-4 flex items-center gap-2&quot;&gt;
+            &lt;ShieldCheck className=&quot;h-4 w-4 text-emerald-400&quot; /&gt;
+            &lt;span&gt;Trading Performance Stats&lt;/span&gt;
+          &lt;/h3&gt;
+
+          &lt;div className=&quot;grid grid-cols-2 gap-4&quot;&gt;
+            &lt;div className=&quot;bg-slate-900/40 p-4 rounded-xl border border-slate-800/50&quot;&gt;
+              &lt;span className=&quot;text-[10px] text-slate-500 font-bold uppercase tracking-wider block&quot;&gt;Total Value (Equity + Cash)&lt;/span&gt;
+              &lt;span className=&quot;text-lg font-black text-slate-100 block mt-1&quot;&gt;₹{totalWorth.toLocaleString(&#039;en-IN&#039;, { maximumFractionDigits: 2 })}&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div className=&quot;bg-slate-900/40 p-4 rounded-xl border border-slate-800/50&quot;&gt;
+              &lt;span className=&quot;text-[10px] text-slate-500 font-bold uppercase tracking-wider block&quot;&gt;Total Trades Executed&lt;/span&gt;
+              &lt;span className=&quot;text-lg font-black text-slate-100 block mt-1&quot;&gt;{totalTrades}&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div className=&quot;bg-slate-900/40 p-4 rounded-xl border border-slate-800/50&quot;&gt;
+              &lt;span className=&quot;text-[10px] text-slate-500 font-bold uppercase tracking-wider block&quot;&gt;BUY Orders Executed&lt;/span&gt;
+              &lt;span className=&quot;text-sm font-bold text-slate-300 block mt-1&quot;&gt;{buyTrades}&lt;/span&gt;
+            &lt;/div&gt;
+
+            &lt;div className=&quot;bg-slate-900/40 p-4 rounded-xl border border-slate-800/50&quot;&gt;
+              &lt;span className=&quot;text-[10px] text-slate-500 font-bold uppercase tracking-wider block&quot;&gt;SELL Orders Executed&lt;/span&gt;
+              &lt;span className=&quot;text-sm font-bold text-slate-300 block mt-1&quot;&gt;{sellTrades}&lt;/span&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+        {/* Portfolio Asset Allocation */}
+        &lt;div className=&quot;glass-panel rounded-2xl p-6&quot;&gt;
+          &lt;h3 className=&quot;text-sm font-bold text-white mb-4 flex items-center gap-2&quot;&gt;
+            &lt;PieChart className=&quot;h-4 w-4 text-blue-400&quot; /&gt;
+            &lt;span&gt;Asset Allocations&lt;/span&gt;
+          &lt;/h3&gt;
+
+          &lt;div className=&quot;space-y-4&quot;&gt;
+            {/* Equities Allocation bar */}
+            &lt;div&gt;
+              &lt;div className=&quot;flex justify-between text-xs font-semibold mb-1 text-slate-300&quot;&gt;
+                &lt;span&gt;Holdings (Stock Equity)&lt;/span&gt;
+                &lt;span&gt;{allocationEquities.toFixed(1)}%&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;w-full bg-slate-900 h-2 rounded-full overflow-hidden&quot;&gt;
+                &lt;div className=&quot;bg-blue-500 h-full&quot; style={{ width: `${allocationEquities}%` }} /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            {/* Cash Allocation bar */}
+            &lt;div&gt;
+              &lt;div className=&quot;flex justify-between text-xs font-semibold mb-1 text-slate-300&quot;&gt;
+                &lt;span&gt;Virtual Cash Balance&lt;/span&gt;
+                &lt;span&gt;{allocationCash.toFixed(1)}%&lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div className=&quot;w-full bg-slate-900 h-2 rounded-full overflow-hidden&quot;&gt;
+                &lt;div className=&quot;bg-emerald-500 h-full&quot; style={{ width: `${allocationCash}%` }} /&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+      <div id="tab-13" class="tab-content hidden p-4 bg-[#080c14] overflow-auto h-[73vh]">
+        <pre><code class="language-javascript">import React, { useState, useEffect, useRef } from &#039;react&#039;;
+import { MessageSquare, Send, X, ArrowUpRight, BrainCircuit } from &#039;lucide-react&#039;;
+
+const QUICK_CHIPS = [
+  &#039;How is my portfolio?&#039;,
+  &#039;Should I buy RELIANCE?&#039;,
+  &#039;What is the current SENSEX index?&#039;,
+  &#039;Explain MACD indicator&#039;
+];
+
+export default function ChatBot() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    { id: &#039;welcome&#039;, sender: &#039;ai&#039;, text: &#039;Hello! 👋 I am your SENSEX AI assistant. I can help analyze your virtual portfolio, look up technical indicators, or scan live stock tickers.\n\nTry asking me: *&quot;Should I buy RELIANCE?&quot;* or *&quot;How is my portfolio doing?&quot;*&#039; }
+  ]);
+  const [inputVal, setInputVal] = useState(&#039;&#039;);
+  const [isTyping, setIsTyping] = useState(false);
+  
+  const messagesEndRef = useRef(null);
+
+  useEffect(() =&gt; {
+    // Scroll chat window to bottom on new messages
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: &#039;smooth&#039; });
+    }
+  }, [messages, isTyping]);
+
+  const handleSend = async (textToSend) =&gt; {
+    const text = textToSend || inputVal.trim();
+    if (!text) return;
+
+    // Add user message to log
+    const userMsgId = Math.random().toString(36).substring(7);
+    setMessages((prev) =&gt; [...prev, { id: userMsgId, sender: &#039;user&#039;, text }]);
+    setInputVal(&#039;&#039;);
+    setIsTyping(true);
+
+    try {
+      const response = await fetch(&#039;http://localhost:5000/api/chatbot&#039;, {
+        method: &#039;POST&#039;,
+        headers: {
+          &#039;Content-Type&#039;: &#039;application/json&#039;,
+          &#039;Authorization&#039;: `Bearer ${localStorage.getItem(&#039;sensex_token&#039;)}`
+        },
+        body: JSON.stringify({ message: text })
+      });
+      const result = await response.json();
+
+      setIsTyping(false);
+      const aiMsgId = Math.random().toString(36).substring(7);
+
+      if (response.ok &amp;&amp; result.response) {
+        setMessages((prev) =&gt; [...prev, { id: aiMsgId, sender: &#039;ai&#039;, text: result.response }]);
+      } else {
+        setMessages((prev) =&gt; [...prev, { id: aiMsgId, sender: &#039;ai&#039;, text: &#039;Sorry, I couldn\&#039;t process that message. Ensure you are signed in.&#039; }]);
+      }
+    } catch (err) {
+      setIsTyping(false);
+      const aiMsgId = Math.random().toString(36).substring(7);
+      setMessages((prev) =&gt; [...prev, { id: aiMsgId, sender: &#039;ai&#039;, text: &#039;Network error. I am currently offline.&#039; }]);
+    }
+  };
+
+  const handleKeyPress = (e) =&gt; {
+    if (e.key === &#039;Enter&#039;) {
+      handleSend();
+    }
+  };
+
+  return (
+    &lt;div className=&quot;fixed bottom-6 right-6 z-40 font-sans&quot;&gt;
+      
+      {/* Floating Toggle Button */}
+      {!isOpen &amp;&amp; (
+        &lt;button
+          onClick={() =&gt; setIsOpen(true)}
+          className=&quot;h-14 w-14 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-all text-white border border-blue-500/20 group cursor-pointer&quot;
+          title=&quot;Open AI Trading Assistant&quot;
+        &gt;
+          &lt;BrainCircuit className=&quot;h-6 w-6 text-white group-hover:rotate-12 transition-transform&quot; /&gt;
+          &lt;span className=&quot;absolute -top-1 -right-1 h-3.5 w-3.5 bg-emerald-400 rounded-full border-2 border-[#070b13] animate-pulse&quot; /&gt;
+        &lt;/button&gt;
+      )}
+
+      {/* Floating Chat Panel Box */}
+      {isOpen &amp;&amp; (
+        &lt;div className=&quot;glass-panel w-[350px] sm:w-[380px] h-[500px] rounded-3xl shadow-2xl flex flex-col justify-between overflow-hidden border border-slate-800/80 animate-scale-up&quot;&gt;
+          
+          {/* Header */}
+          &lt;div className=&quot;bg-slate-900/80 px-4 py-3 border-b border-slate-800/80 flex items-center justify-between backdrop-blur-md&quot;&gt;
+            &lt;div className=&quot;flex items-center gap-2&quot;&gt;
+              &lt;div className=&quot;h-8 w-8 bg-blue-500/10 border border-blue-500/30 rounded-xl flex items-center justify-center&quot;&gt;
+                &lt;BrainCircuit className=&quot;h-4 w-4 text-blue-400&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;h4 className=&quot;text-xs font-black text-white leading-none&quot;&gt;SENSEX Trading AI&lt;/h4&gt;
+                &lt;div className=&quot;flex items-center gap-1 mt-1&quot;&gt;
+                  &lt;span className=&quot;h-1.5 w-1.5 bg-emerald-400 rounded-full animate-ping&quot; /&gt;
+                  &lt;span className=&quot;text-[9px] text-slate-500 font-bold uppercase tracking-wider&quot;&gt;Expert Mode&lt;/span&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            
+            &lt;button
+              onClick={() =&gt; setIsOpen(false)}
+              className=&quot;text-slate-500 hover:text-slate-200 p-1 transition-colors&quot;
+            &gt;
+              &lt;X className=&quot;h-4 w-4&quot; /&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+
+          {/* Messages log list */}
+          &lt;div className=&quot;flex-1 overflow-y-auto px-4 py-3 space-y-3 bg-[#080d16]/30 text-xs&quot;&gt;
+            {messages.map((m) =&gt; {
+              const isAi = m.sender === &#039;ai&#039;;
+              return (
+                &lt;div key={m.id} className={`flex ${isAi ? &#039;justify-start&#039; : &#039;justify-end&#039;}`}&gt;
+                  &lt;div
+                    className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 leading-relaxed whitespace-pre-wrap ${
+                      isAi
+                        ? &#039;bg-slate-900/60 border border-slate-800/80 text-slate-200 rounded-tl-sm&#039;
+                        : &#039;bg-blue-600 text-white font-medium rounded-tr-sm shadow-md&#039;
+                    }`}
+                  &gt;
+                    {m.text}
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              );
+            })}
+            
+            {isTyping &amp;&amp; (
+              &lt;div className=&quot;flex justify-start&quot;&gt;
+                &lt;div className=&quot;bg-slate-900/60 border border-slate-800/80 text-slate-500 rounded-2xl rounded-tl-sm px-4 py-2.5 flex items-center gap-1 font-semibold italic&quot;&gt;
+                  &lt;span className=&quot;h-1.5 w-1.5 bg-slate-500 rounded-full animate-bounce&quot; style={{ animationDelay: &#039;0ms&#039; }} /&gt;
+                  &lt;span className=&quot;h-1.5 w-1.5 bg-slate-500 rounded-full animate-bounce&quot; style={{ animationDelay: &#039;150ms&#039; }} /&gt;
+                  &lt;span className=&quot;h-1.5 w-1.5 bg-slate-500 rounded-full animate-bounce&quot; style={{ animationDelay: &#039;300ms&#039; }} /&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            )}
+            &lt;div ref={messagesEndRef} /&gt;
+          &lt;/div&gt;
+
+          {/* Quick Action Chips &amp; Text Input Area */}
+          &lt;div className=&quot;p-3 border-t border-slate-800/80 bg-slate-900/40 backdrop-blur-md&quot;&gt;
+            
+            {/* Quick chips container */}
+            &lt;div className=&quot;flex gap-1.5 overflow-x-auto pb-2.5 scrollbar-none&quot;&gt;
+              {QUICK_CHIPS.map((chip, idx) =&gt; (
+                &lt;button
+                  key={idx}
+                  onClick={() =&gt; handleSend(chip)}
+                  className=&quot;flex items-center gap-0.5 whitespace-nowrap text-[9px] font-bold text-blue-400 bg-blue-500/10 border border-blue-500/25 px-2.5 py-1 rounded-full hover:bg-blue-500/20 active:scale-95 transition-all&quot;
+                &gt;
+                  &lt;span&gt;{chip}&lt;/span&gt;
+                  &lt;ArrowUpRight className=&quot;h-2.5 w-2.5&quot; /&gt;
+                &lt;/button&gt;
+              ))}
+            &lt;/div&gt;
+
+            {/* Input fields */}
+            &lt;div className=&quot;flex items-center gap-2 bg-slate-950 p-1.5 rounded-xl border border-slate-800/80&quot;&gt;
+              &lt;input
+                type=&quot;text&quot;
+                placeholder=&quot;Ask chatbot...&quot;
+                value={inputVal}
+                onChange={(e) =&gt; setInputVal(e.target.value)}
+                onKeyPress={handleKeyPress}
+                className=&quot;bg-transparent border-none outline-none text-slate-100 font-semibold px-2 py-1 flex-1 text-xs&quot;
+              /&gt;
+              &lt;button
+                onClick={() =&gt; handleSend()}
+                className=&quot;h-7 w-7 bg-blue-500 text-slate-950 rounded-lg flex items-center justify-center hover:bg-blue-600 active:scale-95 transition-colors cursor-pointer&quot;
+              &gt;
+                &lt;Send className=&quot;h-3.5 w-3.5&quot; /&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+
+        &lt;/div&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+      </div>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function switchTab(evt, tabId) {
+      // Hide all contents
+      const contents = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < contents.length; i++) {
+        contents[i].classList.add("hidden");
+      }
+
+      // Deactivate all buttons
+      const buttons = document.getElementsByClassName("tab-btn");
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove("border-blue-500", "text-white", "bg-slate-800/40");
+      }
+
+      // Show current tab
+      document.getElementById(tabId).classList.remove("hidden");
+
+      // Activate button
+      evt.currentTarget.classList.add("border-blue-500", "text-white", "bg-slate-800/40");
+      
+      // Update header title
+      document.getElementById("active-file-title").innerText = evt.currentTarget.innerText.trim();
+    }
+  </script>
+</body>
+</html>
